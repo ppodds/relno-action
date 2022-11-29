@@ -1,0 +1,21 @@
+{
+  "plugins": ["jest", "@typescript-eslint/eslint-plugin"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended",
+    "plugin:github/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "no-unused-vars": "off",
+    "quotes": ["error", "double"]
+  },
+  "env": {
+    "node": true,
+    "jest": true
+  }
+}
