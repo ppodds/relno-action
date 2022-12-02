@@ -38,8 +38,9 @@ export class Generator {
     let result = "";
     for (const prType of this._options.prTypes) {
       const commits = this._log.filter((commit) => {
-        return commit.message.match(
-          new RegExp(`${prType.identifier}((.*))?: `),
+        return (
+          commit.parents.split(" ").length > 1 &&
+          commit.message.match(new RegExp(`${prType.identifier}((.*))?: `))
         );
       });
       if (commits.length === 0) continue;
