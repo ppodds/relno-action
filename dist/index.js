@@ -174,7 +174,8 @@ class Generator {
         let result = "";
         for (const prType of this._options.prTypes) {
             const commits = this._log.filter((commit) => {
-                return commit.message.match(new RegExp(`${prType.identifier}((.*))?: `));
+                return (commit.parents.split(" ").length > 1 &&
+                    commit.message.match(new RegExp(`${prType.identifier}((.*))?: `)));
             });
             if (commits.length === 0)
                 continue;
@@ -331,7 +332,7 @@ function run() {
                 prTypes: (_b = config.prTypes) !== null && _b !== void 0 ? _b : [],
             });
             const result = generator.generate();
-            (0, core_1.info)("Generated release note:\n" + result);
+            (0, core_1.info)(`Generated release note:\n${result}`);
             (0, core_1.setOutput)("out", result);
         }
         catch (e) {
