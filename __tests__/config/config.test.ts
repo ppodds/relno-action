@@ -18,4 +18,12 @@ test
       { identifier: "test", title: "✅ Tests" },
     ]);
   });
+  test("load config with default value", async () => {
+    const config = new Config();
+    expect(async () => await config.load()).not.toThrowError();
+  });
+  test("load config with a not exist path", async () => {
+    const config = new Config();
+    expect(async () => await config.load("9487")).rejects.toThrowError();
+  });
 });
