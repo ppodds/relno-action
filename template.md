@@ -7,7 +7,7 @@ Check out here for other recent changes.
 ### {{ title }}
 
 <!-- commits -->
-- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ message }} (#{{ prNumber }})
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ toSentence(message) }} (#{{ prNumber }})
 <!-- commits -->
 
 <!-- changes -->
