@@ -28,6 +28,7 @@ export class Config {
       this._prTypes = config.prTypes;
     } catch (e) {
       error("Failed to load the config file or the template file");
+      throw e;
     }
   }
 
