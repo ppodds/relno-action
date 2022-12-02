@@ -12,7 +12,6 @@
   },
   "rules": {
     "no-unused-vars": "off",
-    "quotes": ["error", "double"],
     "i18n-text/no-en": "off"
   },
   "env": {

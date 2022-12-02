@@ -1,4 +1,5 @@
 import { Commit } from "../git/log";
+import { ExpressionEvaluator } from "./expression-evaluator";
 import { PRType } from "./pr-type";
 
 export interface GeneratorOptions {
@@ -61,10 +62,19 @@ export class Generator {
   ): string {
     let result = "";
     for (const commit of commits) {
-      const messageWithoutPRType = commit.message.split(": ")[1];
+      const regex = /([^()\n]+)(?:\((.*)\))?: (.+) \(#([1-9][0-9]*)\)/;
+      const matchResult = commit.message.match(regex);
+      if (!matchResult) continue;
+      const prType = matchResult[1];
+      const prSubtype = matchResult[2] ?? "";
+      const message = matchResult[3];
+      const prNumber = matchResult[4];
       result += this.parseTemplate(commitsTemplate, {
         ...commit,
-        messageWithoutPRType,
+        prType,
+        prSubtype,
+        message,
+        prNumber,
       });
     }
     return result;
@@ -94,23 +104,19 @@ export class Generator {
 
   private parseTemplate(
     template: string,
-    variable: { [key: string]: string | undefined },
+    variable: {
+      [key: string]: string | undefined;
+    },
   ): string {
-    const regex = /{{ *([a-zA-Z0-9()]*) *}}/;
+    const regex = /{{([^\n}}]*)}}/;
     let matchResult = template.match(regex);
     let result = template;
     while (matchResult) {
-      const parsedVariable = variable[matchResult[1]];
-      if (!parsedVariable)
-        throw new Error(`Unsupport variable: ${matchResult[1]}`);
+      const evaluator = new ExpressionEvaluator(variable);
+      const parsedVariable = evaluator.evaluate(matchResult[1].trim());
       result = result.replace(regex, parsedVariable);
       matchResult = result.match(regex);
     }
     return result;
-  }
-
-  private toSentanceCase(str: string): string {
-    if (str.length === 0) throw new Error("String must not be empty");
-    return str[0].toUpperCase() + str.substring(1);
   }
 }
