@@ -1,25 +1,17 @@
-name: "ci"
+name: Unit Tests and Test Action
 on:
   push:
-  pull_request:
 
 jobs:
   unit-test:
+    uses: ./.github/workflows/unit-test.yml
+  action-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2
         with:
-          version: 7
-      - name: Set node version to 16
-        uses: actions/setup-node@v3
+          fetch-depth: 0
+      - uses: ./
         with:
-          node-version: 16
-          cache: "pnpm"
-      - name: Install dependencies
-        run: pnpm i
-      - name: Run unit tests
-        run: pnpm test
-      - name: Run linter
-        run: pnpm lint
+          from: 856dd1721f46e35ea03823f9c86f60acf2b43865
+          to: HEAD

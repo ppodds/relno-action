@@ -1,0 +1,11 @@
+name: "Release Note"
+description: "A fully configurable release note generation framework. Allow you to automatically generate a beautiful release note from commit messages and pull requests."
+author: "ppodds"
+inputs:
+  from:
+    required: true
+  to:
+    required: true
+runs:
+  using: "node16"
+  main: "dist/index.js"

@@ -3,17 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "description": "A fully configurable release note generation framework. Allow you to automatically generate a beautiful release note from commit messages and pull requests.",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "author": "ppodds",
   "license": "MIT",
   "module": "CommonJS",
   "scripts": {
     "build": "tsc",
-    "format": "prettier --write src/**/*.ts",
-    "format-check": "prettier --check src/**/*.ts",
+    "format": "prettier --write {src,__tests__}/**/*.ts",
+    "format-check": "prettier --check {src,__tests__}/**/*.ts",
     "lint": "eslint --fix src/**/*.ts",
     "test": "jest",
-    "package": "ncc build",
+    "package": "ncc build --source-map --license licenses.txt",
     "all": "pnpm build && pnpm format && pnpm lint && pnpm package && pnpm test"
   },
   "repository": {
@@ -52,6 +52,9 @@
     "src/**/*.ts": [
       "prettier --write",
       "eslint --fix"
+    ],
+    "__tests__/**/*.ts": [
+      "prettier --write"
     ]
   }
 }
