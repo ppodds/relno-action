@@ -1,7 +1,3 @@
-# release-note
-
-<div id="top"></div>
-
 <!-- PROJECT SHIELDS -->
 
 [<div align="center"> ![Contributors][contributors-shield]][contributors-url]
@@ -20,9 +16,11 @@
 <br />
 <div align="center">
 <p align="center">
-    <a href="https://github.com/ppodds/release-note"><strong>Explore Usage »</strong></a>
+    <a href="#getting-started"><strong>Explore Usage »</strong></a>
     <br />
     <br />
+    <a href="docs/index.md">Documentation</a>
+    ·
     <a href="https://github.com/ppodds/release-note/issues">Report Bug</a>
     ·
     <a href="https://github.com/ppodds/release-note/issues">Request Feature</a>
@@ -56,6 +54,78 @@
 <!-- GETTING STARTED -->
 
 ## Getting Started
+
+### Prerequisites
+
+Change your repository default pull request title format. You can find it in `Settings` -> `General` -> `Pull Requests` on GitHub repository page.
+
+![repository setting](docs/pr_default_message.png)
+
+> **Note:** `release-note` use pull request title to generate release note. So you need to change your repository default pull request title format and make sure your pull request title follow [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
+
+### Setup config file
+
+Create a `release-note.json` file in your project root directory.
+
+```json
+{
+  "template": "template.md",
+  "prTypes": [
+    { "identifier": "feat", "title": "🚀 Enhancements" },
+    { "identifier": "fix", "title": "🩹 Fixes" },
+    { "identifier": "docs", "title": "📖 Documentation" },
+    { "identifier": "chore", "title": "🏡 Chore" },
+    { "identifier": "refactor", "title": "💅 Refactors" },
+    { "identifier": "test", "title": "✅ Tests" }
+  ]
+}
+```
+
+`template` is the template file path. We will use this file to generate the release note. `prTypes` is the pull request type configuration. `identifier` is the pull request type identifier. `title` is the pull request type title which would be generated. According above config, if you have a pull request with title `feat: add new feature`, the generated title would be `🚀 Enhancements`
+
+Then, create a `template.md` file in your project root directory.
+
+```markdown
+## 📝 Changelog
+
+[compare changes]({{ compareUrl }})
+%% changes %%
+
+### {{ title }}
+
+%% commits %%
+
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ toSentence(message) }} (#{{ prNumber }})
+%% commits %%
+%% changes %%
+<!-- Generate by Release Note -->
+```
+
+You might notice that there are some special syntax in the template file. `{{ }}` is the expression syntax. `release-note` would replace it with the specified variable or macro, even a string literal. `%% %%` is the section tag syntax. `release-note` need this to know where the content should be inserted.
+
+### Install release-note
+
+Now, you can add `release-note` to your release workflow.
+
+```yaml
+name: Release
+on:
+  release:
+    types: [published, edited]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: ppodds/release-note@v0.0.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+Create a new release, and you will get your beautiful release note. 🚀
 
 <!-- ROADMAP -->
 
