@@ -1,6 +1,6 @@
 {
   "name": "release-note",
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.1",
   "private": true,
   "description": "A fully configurable release note generation framework. Allow you to automatically generate a beautiful release note from commit messages and pull requests.",
   "main": "dist/index.js",
