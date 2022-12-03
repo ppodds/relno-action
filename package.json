@@ -13,8 +13,7 @@
     "format-check": "prettier --check {src,__tests__}/**/*.ts",
     "lint": "eslint --fix src/**/*.ts",
     "test": "jest",
-    "package": "ncc build --source-map --license licenses.txt",
-    "all": "pnpm build && pnpm format && pnpm lint && pnpm package && pnpm test"
+    "package": "ncc build"
   },
   "repository": {
     "type": "git",
