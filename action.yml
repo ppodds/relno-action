@@ -3,9 +3,11 @@ description: "A fully configurable release note generation framework. Allow you 
 author: "ppodds"
 inputs:
   from:
-    required: true
+    required: false
   to:
-    required: true
+    required: false
+  token:
+    required: false
 runs:
   using: "node16"
   main: "dist/index.js"
