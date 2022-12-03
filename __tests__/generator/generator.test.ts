@@ -14,26 +14,22 @@ describe("Generator test", () => {
         { identifier: "test", title: "✅ Tests" },
       ],
       template: `## 📝 Changelog
-
-<!-- changes -->
+%% changes %%
 
 ### {{ title }}
 
-<!-- commits -->
+%% commits %%
 - {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ message }} (#{{ prNumber }})
-<!-- commits -->
-
-<!-- changes -->
+%% commits %%
+%% changes %%
 `,
     });
     expect(generator.generate()).toBe(`## 📝 Changelog
-
 
 ### 🚀 Enhancements
 
 - frontend: list UI improvement (#212)
 - search engine friendly CoursesSearch (#199)
-
 
 ### 🩹 Fixes
 
@@ -45,18 +41,15 @@ describe("Generator test", () => {
 - show wrong page when user view feedback and back (#192)
 - wrong dev proxy setting (#191)
 
-
 ### 🏡 Chore
 
 - remove unnecessary files (#193)
 - deps: update pnpm to v7.17.0 (#190)
 
-
 ### 💅 Refactors
 
 - frontend: direct call api endpoint instead of calling wrapper (#207)
 - frontend: paginator state management (#205)
-
 `);
   });
 });

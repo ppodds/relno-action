@@ -1,13 +1,11 @@
 ## 📝 Changelog
 
 Check out here for other recent changes.
-
-<!-- changes -->
+%% changes %%
 
 ### {{ title }}
 
-<!-- commits -->
+%% commits %%
 - {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ toSentence(message) }} (#{{ prNumber }})
-<!-- commits -->
-
-<!-- changes -->
+%% commits %%
+%% changes %%
