@@ -1,6 +1,6 @@
 ## 📝 Changelog
 
-Check out here for other recent changes.
+[compare changes]({{ compareUrl }})
 %% changes %%
 
 ### {{ title }}
