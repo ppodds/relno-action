@@ -83,7 +83,7 @@ export class Generator {
 
   public getSection(section: string) {
     const regex = new RegExp(
-      `<!-- *${section} *--> *\n((.|\r|\n)*)<!-- *${section} *--> *`,
+      `%% *${section} *%% *\n((.|\r|\n)*)%% *${section} *%% *`,
     );
     const result = this._options.template.match(regex);
     if (!result) return "";
@@ -97,7 +97,7 @@ export class Generator {
     parsedSection: string,
   ) {
     const newTemplate = template.replace(
-      new RegExp(`<!-- *${sectionName} *-->\n`, "g"),
+      new RegExp(`%% *${sectionName} *%%\n`, "g"),
       "",
     );
     return newTemplate.replace(sectionContent, parsedSection);
