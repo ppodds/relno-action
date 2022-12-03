@@ -5,13 +5,3 @@ on:
 jobs:
   unit-test:
     uses: ./.github/workflows/unit-test.yml
-  action-test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-      - uses: ./
-        with:
-          from: 856dd1721f46e35ea03823f9c86f60acf2b43865
-          to: HEAD
