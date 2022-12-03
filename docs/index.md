@@ -14,14 +14,14 @@
 
 `template`
 
-type: `string`
+type: `string`  
 required: yes
 
 The path to your template file.
 
 `prTypes`
 
-type: `{ "identifier": string, "title": string }[]`
+type: `{ "identifier": string, "title": string }[]`  
 required: yes
 
 Define which pull request should be included in the release note and how to generate the title.
