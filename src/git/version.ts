@@ -13,16 +13,18 @@ export function getEndVersion(): string {
 
 /**
  * Get the version which would be the start of the changelog
+ * @param token GitHub token
  * @param targetVersion The version which would be the end of the changelog
  * @returns If input from is provided, return it. Otherwise, return the previous version.
  * If no previous version is found, return the first commit.
  */
-export async function getStartVersion(targetVersion?: string): Promise<string> {
+export async function getStartVersion(
+  token: string,
+  targetVersion?: string,
+): Promise<string> {
   const inputVersion = getInput("from", { required: false });
   if (inputVersion !== "") return inputVersion;
   info("Find previous version according to target version");
-  const token = getInput("token", { required: false });
-  if (token === "") throw new Error("No GitHub token was provided");
   if (!targetVersion)
     throw new Error("No target version was provided to compare to");
   if (!valid(targetVersion))
@@ -50,5 +52,8 @@ export async function getStartVersion(targetVersion?: string): Promise<string> {
   if (result) return result;
   // find oldest commit instead
   info("No previous version was found, using oldest commit instead");
-  return (await simpleGit().log()).all[-1].hash;
+  const initialCommit = (await simpleGit().log()).all.at(-1);
+  if (!initialCommit)
+    throw new Error("No initial commit was found, this should never happen");
+  return initialCommit.hash;
 }

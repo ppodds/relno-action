@@ -9,3 +9,4 @@ Check out here for other recent changes.
 - {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ toSentence(message) }} (#{{ prNumber }})
 %% commits %%
 %% changes %%
+<!-- Generate by Release Note -->

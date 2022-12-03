@@ -22,6 +22,7 @@ describe("Generator test", () => {
 - {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ message }} (#{{ prNumber }})
 %% commits %%
 %% changes %%
+<!-- Generate by Release Note -->
 `,
     });
     expect(generator.generate()).toBe(`## 📝 Changelog
@@ -50,6 +51,7 @@ describe("Generator test", () => {
 
 - frontend: direct call api endpoint instead of calling wrapper (#207)
 - frontend: paginator state management (#205)
+<!-- Generate by Release Note -->
 `);
   });
 });
