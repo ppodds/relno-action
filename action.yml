@@ -7,7 +7,11 @@ inputs:
   to:
     required: false
   token:
-    required: false
+    required: true
+    description: "GitHub token"
+outputs:
+  release-note:
+    description: "The generated release note"
 runs:
   using: "node16"
   main: "dist/index.js"
