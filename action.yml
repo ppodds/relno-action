@@ -2,10 +2,6 @@ name: "Release Note"
 description: "A fully configurable release note generation framework. Allow you to automatically generate a beautiful release note from commit messages and pull requests."
 author: "ppodds"
 inputs:
-  from:
-    required: false
-  to:
-    required: false
   token:
     required: true
     description: "GitHub token"
