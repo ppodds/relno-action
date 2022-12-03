@@ -1,10 +1,29 @@
 import { Commit } from "../git/log";
-import { ExpressionEvaluator } from "./expression-evaluator";
+import { ExpressionEvaluator, Variable } from "./expression-evaluator";
 import { PRType } from "./pr-type";
+
+export interface ReleaseMetadata {
+  authorLogin: string;
+  authorName: string;
+  authorEmail: string;
+  createdAt: string;
+  discussionUrl: string;
+  htmlUrl: string;
+  id: string;
+  name: string;
+  publishedAt: string;
+  tagName: string;
+  fromVersion: string;
+  tarballUrl: string;
+  targetCommitish: string;
+  zipballUrl: string;
+  compareUrl: string;
+}
 
 export interface GeneratorOptions {
   prTypes: PRType[];
   template: string;
+  metadata: ReleaseMetadata;
 }
 
 export class Generator {
@@ -25,11 +44,16 @@ export class Generator {
 
   private parseGlobalSection(): string {
     const section = this.getSection("changes");
-    return this.replaceSection(
-      this._options.template,
-      "changes",
-      section,
-      this.parseChangesSection(section),
+    return this.parseTemplate(
+      this.replaceSection(
+        this._options.template,
+        "changes",
+        section,
+        this.parseChangesSection(section),
+      ),
+      {
+        ...this._options.metadata,
+      },
     );
   }
 
@@ -103,12 +127,7 @@ export class Generator {
     return newTemplate.replace(sectionContent, parsedSection);
   }
 
-  private parseTemplate(
-    template: string,
-    variable: {
-      [key: string]: string | undefined;
-    },
-  ): string {
+  private parseTemplate(template: string, variable: Variable): string {
     const regex = /{{([^\n}}]*)}}/;
     let matchResult = template.match(regex);
     let result = template;
