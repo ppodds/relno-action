@@ -19,6 +19,17 @@ const metadata: ReleaseMetadata = {
   zipballUrl: "https://test.com/zipball/1",
   compareUrl: "https://test.com/compare/1...2",
 };
+const template = `## 📝 Changelog
+%% changes %%
+
+### {{ title }}
+
+%% commits %%
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ message }} (#{{ prNumber }})
+%% commits %%
+%% changes %%
+<!-- Generate by Release Note -->
+`;
 describe("Generator test", () => {
   test("Generate a release note", () => {
     const generator = new Generator(commits, {
@@ -30,17 +41,7 @@ describe("Generator test", () => {
         { identifier: "refactor", title: "💅 Refactors" },
         { identifier: "test", title: "✅ Tests" },
       ],
-      template: `## 📝 Changelog
-%% changes %%
-
-### {{ title }}
-
-%% commits %%
-- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ message }} (#{{ prNumber }})
-%% commits %%
-%% changes %%
-<!-- Generate by Release Note -->
-`,
+      template,
       metadata,
     });
     expect(generator.generate()).toBe(`## 📝 Changelog
@@ -89,5 +90,39 @@ describe("Generator test", () => {
         "https://test.com/commit/test\nhttps://test.com/zipball/1\n" +
         "https://test.com/compare/1...2",
     );
+  });
+  test("Generate with commit contains subtype", () => {
+    const generator = new Generator(
+      [
+        {
+          hash: "d49b398cfca0376c83adb89d25df18f857b901e7",
+          parents:
+            "88d9f36e8aef3f4ecd043511ec5a871775d6c1a5 167616ac2a9defb49e149757f4a865330cec2c4f",
+          date: "2022-11-25T19:15:00+08:00",
+          message: "chore(docs): update README.md (#1)",
+          refs: "HEAD -> master, upstream/master, origin/master, origin/HEAD",
+          body: "",
+          commiterName: "GitHub",
+          commiterEmail: "noreply@github.com",
+          authorName: "ppodds",
+          authorEmail: "oscar20020629@gmail.com",
+        },
+      ],
+      {
+        prTypes: [
+          { identifier: "docs", title: "📖 Documentation" },
+          { identifier: "chore", title: "🏡 Chore" },
+        ],
+        template,
+        metadata,
+      },
+    );
+    expect(generator.generate()).toBe(`## 📝 Changelog
+
+### 🏡 Chore
+
+- docs: update README.md (#1)
+<!-- Generate by Release Note -->
+`);
   });
 });

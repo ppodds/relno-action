@@ -64,7 +64,11 @@ export class Generator {
       const commits = this._log.filter((commit) => {
         return (
           commit.parents.split(" ").length > 1 &&
-          commit.message.match(new RegExp(`${prType.identifier}((.*))?: `))
+          commit.message.match(
+            new RegExp(
+              `${prType.identifier}(?:\\(.*\\))?: .+ \\(#[1-9][0-9]*\\)`,
+            ),
+          )
         );
       });
       if (commits.length === 0) continue;
