@@ -1,3 +1,5 @@
+import date from "date-and-time";
+
 export const macros = {
   toSentence: (str: string): string => {
     if (str.length === 0) return str;
@@ -13,4 +15,10 @@ export const macros = {
     toBeCheck.length > 0 ? content : "",
   generateIfEmpty: (toBeCheck: string, content: string): string =>
     toBeCheck.length === 0 ? content : "",
+  formatDate: (dateStr: string, format: string): string => {
+    const dateObj = new Date(dateStr);
+    if (isNaN(dateObj.getDate()))
+      throw new Error(`Invalid date string: ${dateStr}`);
+    return date.format(dateObj, format);
+  },
 };
