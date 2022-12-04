@@ -225,3 +225,22 @@ If the variable is not defined in the context and you use it, it will throw an e
 - `prNumber`
   - pull request number (extracted from commit message)
   - e.g. `docs: a test (#1)` => `1`
+
+## Frequently Asked Questions
+
+### How do `release-note` know when to update the release note?
+
+`release-note` will check the release body to see if it contains `<!-- Generate by Release Note -->`. If it contains this comment, it will not update the release body. It means you can edit the release body manually after the release note is generated. This is useful when you want to add some extra information in the specify release.
+
+> **Note**: If you want to update the release note, you need to remove the comment.
+> **Note**: We might make the comment configurable in the future.
+
+### Action failed with `unknown revision or path not in the working tree` error
+
+This error is caused by `actions/checkout` action. You need to add `fetch-depth: 0` to the `actions/checkout` action. `actions/checkout` will only fetch the commit which triggered the workflow by default. If you want to get the whole commit tree, you need to set `fetch-depth` manually. See [actions/checkout](https://github.com/actions/checkout).
+
+```yaml
+- uses: actions/checkout@v3
+  with:
+    fetch-depth: 0
+```
