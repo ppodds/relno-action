@@ -1,5 +1,17 @@
 # Documentation
 
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li><a href="#basic-knowledge">Basic Knowledge</a></li>
+    <li><a href="#configuration">Configuration</a></li>
+    <li><a href="#template-syntax">Template Syntax</a></li>
+    <li><a href="#macros-and-variables">Macros and Variables</a></li>
+    <li><a href="#variables">Variables</a></li>
+    <li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
+  </ol>
+</details>
+
 ## Basic Knowledge
 
 ### How do `release-note` work?
