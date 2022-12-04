@@ -256,8 +256,8 @@ If the variable is not defined in the context and you use it, it will throw an e
 
 `release-note` will check the release body to see if it contains `<!-- Generate by Release Note -->`. If it contains this comment, it will not update the release body. It means you can edit the release body manually after the release note is generated. This is useful when you want to add some extra information in the specify release.
 
-> **Note**: If you want to update the release note, you need to remove the comment.  
-> **Note**: We might make the comment configurable in the future.
+> **Note**: If you want to update the release note, you need to remove the comment.
+> We might make the comment configurable in the future.
 
 ### Action failed with `unknown revision or path not in the working tree` error
 
