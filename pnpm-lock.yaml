@@ -9,6 +9,7 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.45.0
   '@typescript-eslint/parser': ^5.30.5
   '@vercel/ncc': ^0.34.0
+  date-and-time: ^2.4.1
   eslint: ^8.19.0
   eslint-plugin-github: ^4.3.6
   eslint-plugin-jest: ^27.0.0
@@ -25,6 +26,7 @@ specifiers:
 dependencies:
   '@actions/core': 1.10.0
   '@actions/github': 5.1.1
+  date-and-time: 2.4.1
   semver: 7.3.8
   simple-git: 3.15.0
 
@@ -1559,6 +1561,10 @@ packages:
   /damerau-levenshtein/1.0.8:
     resolution: {integrity: sha512-sdQSFB7+llfUcQHUQO3+B8ERRj0Oa4w9POWMI/puGtuf7gFywGmkaLCElnudfTiKZV+NvHqL0ifzdrI8Ro7ESA==}
     dev: true
+
+  /date-and-time/2.4.1:
+    resolution: {integrity: sha512-fG+ClATev+wHryqxOoGcTTegr5RhYE+tz/XHUkTQ/zvpWqQ90oOxjOhuMQ02bw87Oy9N3qBENCHHHSKdWJjgTg==}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
