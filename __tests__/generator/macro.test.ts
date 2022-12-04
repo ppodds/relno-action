@@ -25,4 +25,8 @@ describe("Macros test", () => {
     expect(macros.generateIfNotEmpty("", "test")).toBe("");
     expect(macros.generateIfNotEmpty("not empty", "test")).toBe("test");
   });
+  test("formatDate", () => {
+    expect(macros.formatDate("2015-03-10T14:09:18Z", "YYYY-MM-DD"));
+    expect(() => macros.formatDate("aaa", "YYYY-MM-DD")).toThrowError();
+  });
 });
