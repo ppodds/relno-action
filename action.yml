@@ -1,5 +1,5 @@
 name: "Release Note"
-description: "A fully configurable release note generation framework. Allow you to automatically generate a beautiful release note from commit messages and pull requests."
+description: "A GitHub action that creates release notes from commit messages and pull requests. Fully customizable to meet your needs."
 author: "ppodds"
 inputs:
   token:
@@ -11,3 +11,6 @@ outputs:
 runs:
   using: "node16"
   main: "dist/index.js"
+branding:
+  icon: "book-open"
+  color: "blue"
