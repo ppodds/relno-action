@@ -7,7 +7,6 @@
     <li><a href="#configuration">Configuration</a></li>
     <li><a href="#template-syntax">Template Syntax</a></li>
     <li><a href="#macros-and-variables">Macros and Variables</a></li>
-    <li><a href="#variables">Variables</a></li>
     <li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
   </ol>
 </details>
@@ -154,6 +153,19 @@ generateIfNotEmpty("", "test"); // test
 generateIfNotEmpty("a", "test"); // generate nothing
 ```
 
+#### formatDate
+
+Signature: `formatDate(dateStr: string, format: string)`
+
+Generate a formatted date string. Check out [date-and-time](https://github.com/knowledgecode/date-and-time#formatdateobj-arg-utc) to see the supported format string.
+
+Examples:
+
+```typescript
+// publishedAt = "2022-01-01T00:00:00Z"
+formatDate(publishedAt, "YYYY-MM-DD"); // 2022-01-01
+```
+
 ### Variables
 
 If the variable is not defined in the context and you use it, it will throw an error. If `release-note` can't get the value of the variable, it will use an empty string instead.
@@ -245,7 +257,7 @@ If the variable is not defined in the context and you use it, it will throw an e
 `release-note` will check the release body to see if it contains `<!-- Generate by Release Note -->`. If it contains this comment, it will not update the release body. It means you can edit the release body manually after the release note is generated. This is useful when you want to add some extra information in the specify release.
 
 > **Note**: If you want to update the release note, you need to remove the comment.
-> **Note**: We might make the comment configurable in the future.
+> We might make the comment configurable in the future.
 
 ### Action failed with `unknown revision or path not in the working tree` error
 
