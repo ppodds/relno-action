@@ -113,13 +113,13 @@ on:
     types: [published, edited]
 
 jobs:
-  build:
+  release-note:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: ppodds/release-note@v0.0.1
+      - uses: ppodds/release-note@v0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -131,7 +131,7 @@ Create a new release, and you will get your beautiful release note. 🚀
 ## Roadmap
 
 - [ ] Plugin system
-- [ ] Fully configurable
+- [ ] Fully configurable commit message parser
 
 See the [open issues](https://github.com/ppodds/release-note/issues)
 for a full list of proposed features (and known issues).
