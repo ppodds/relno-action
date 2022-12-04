@@ -7,7 +7,6 @@
     <li><a href="#configuration">Configuration</a></li>
     <li><a href="#template-syntax">Template Syntax</a></li>
     <li><a href="#macros-and-variables">Macros and Variables</a></li>
-    <li><a href="#variables">Variables</a></li>
     <li><a href="#frequently-asked-questions">Frequently Asked Questions</a></li>
   </ol>
 </details>
@@ -152,6 +151,19 @@ Examples:
 ```typescript
 generateIfNotEmpty("", "test"); // test
 generateIfNotEmpty("a", "test"); // generate nothing
+```
+
+#### formatDate
+
+Signature: `formatDate(dateStr: string, format: string)`
+
+Generate a formatted date string. Check out [date-and-time](https://github.com/knowledgecode/date-and-time#formatdateobj-arg-utc) to see the supported format string.
+
+Examples:
+
+```typescript
+// publishedAt = "2022-01-01T00:00:00Z"
+formatDate(publishedAt, "YYYY-MM-DD"); // 2022-01-01
 ```
 
 ### Variables
