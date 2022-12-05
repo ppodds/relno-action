@@ -8,6 +8,11 @@ describe("ExpressionEvaluator test", () => {
       expect(evaluator.evaluate("a")).toBe("1");
       expect(evaluator.evaluate("b")).toBe("2");
     });
+    test("Evaluate a boolean variable", () => {
+      const evaluator = new ExpressionEvaluator({ a: true, b: false });
+      expect(evaluator.evaluate("a")).toBe(true);
+      expect(evaluator.evaluate("b")).toBe(false);
+    });
     test("Evaluate a non-existent variable", () => {
       const evaluator = new ExpressionEvaluator({});
       expect(() => evaluator.evaluate("a")).toThrowError();

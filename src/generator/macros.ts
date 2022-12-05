@@ -21,4 +21,8 @@ export const macros = {
       throw new Error(`Invalid date string: ${dateStr}`);
     return date.format(dateObj, format);
   },
+  generateIf: (condition: boolean, content: string): string =>
+    condition ? content : "",
+  generateIfNot: (condition: boolean, content: string): string =>
+    !condition ? content : "",
 };

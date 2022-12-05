@@ -25,7 +25,7 @@ const template = `## 📝 Changelog
 ### {{ title }}
 
 %% commits %%
-- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ message }} (#{{ prNumber }})
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ message }} (#{{ prNumber }})
 %% commits %%
 %% changes %%
 <!-- Generate by Release Note -->
@@ -124,5 +124,79 @@ describe("Generator test", () => {
 - docs: update README.md (#1)
 <!-- Generate by Release Note -->
 `);
+  });
+  test("Generate with commit contains breaking change", () => {
+    const generator = new Generator(
+      [
+        {
+          hash: "d49b398cfca0376c83adb89d25df18f857b901e7",
+          parents:
+            "88d9f36e8aef3f4ecd043511ec5a871775d6c1a5 167616ac2a9defb49e149757f4a865330cec2c4f",
+          date: "2022-11-25T19:15:00+08:00",
+          message: "feat!: edit existed feature (#1)",
+          refs: "HEAD -> master, upstream/master, origin/master, origin/HEAD",
+          body: "",
+          commiterName: "GitHub",
+          commiterEmail: "noreply@github.com",
+          authorName: "ppodds",
+          authorEmail: "oscar20020629@gmail.com",
+        },
+      ],
+      {
+        prTypes: [{ identifier: "feat", title: "🚀 Enhancements" }],
+        template,
+        metadata,
+      },
+    );
+    expect(generator.generate()).toBe(`## 📝 Changelog
+
+### 🚀 Enhancements
+
+- ⚠️ edit existed feature (#1)
+<!-- Generate by Release Note -->
+`);
+  });
+  test("Generate boolean type variable", () => {
+    const generator = new Generator(
+      [
+        {
+          hash: "d49b398cfca0376c83adb89d25df18f857b901e7",
+          parents:
+            "88d9f36e8aef3f4ecd043511ec5a871775d6c1a5 167616ac2a9defb49e149757f4a865330cec2c4f",
+          date: "2022-11-25T19:15:00+08:00",
+          message: "feat!: edit existed feature (#1)",
+          refs: "HEAD -> master, upstream/master, origin/master, origin/HEAD",
+          body: "",
+          commiterName: "GitHub",
+          commiterEmail: "noreply@github.com",
+          authorName: "ppodds",
+          authorEmail: "oscar20020629@gmail.com",
+        },
+        {
+          hash: "d49b398cfca0376c83adb89d25df18f857b901e7",
+          parents:
+            "88d9f36e8aef3f4ecd043511ec5a871775d6c1a5 167616ac2a9defb49e149757f4a865330cec2c4f",
+          date: "2022-11-25T19:15:00+08:00",
+          message: "feat: add a new feature (#2)",
+          refs: "HEAD -> master, upstream/master, origin/master, origin/HEAD",
+          body: "",
+          commiterName: "GitHub",
+          commiterEmail: "noreply@github.com",
+          authorName: "ppodds",
+          authorEmail: "oscar20020629@gmail.com",
+        },
+      ],
+      {
+        prTypes: [{ identifier: "feat", title: "🚀 Enhancements" }],
+        template: `%% changes %%
+%% commits %%
+{{ prBreaking }}
+%% commits %%
+%% changes %%
+`,
+        metadata,
+      },
+    );
+    expect(generator.generate()).toBe("true\nfalse\n");
   });
 });

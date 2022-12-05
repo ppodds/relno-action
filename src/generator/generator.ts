@@ -66,7 +66,7 @@ export class Generator {
           commit.parents.split(" ").length > 1 &&
           commit.message.match(
             new RegExp(
-              `${prType.identifier}(?:\\(.*\\))?: .+ \\(#[1-9][0-9]*\\)`,
+              `${prType.identifier}(?:\\(.*\\))?!?: .+ \\(#[1-9][0-9]*\\)`,
             ),
           )
         );
@@ -91,17 +91,19 @@ export class Generator {
   ): string {
     let result = "";
     for (const commit of commits) {
-      const regex = /([^()\n]+)(?:\((.*)\))?: (.+) \(#([1-9][0-9]*)\)/;
+      const regex = /([^()\n!]+)(?:\((.*)\))?(!)?: (.+) \(#([1-9][0-9]*)\)/;
       const matchResult = commit.message.match(regex);
       if (!matchResult) continue;
       const prType = matchResult[1];
       const prSubtype = matchResult[2] ?? "";
-      const message = matchResult[3];
-      const prNumber = matchResult[4];
+      const prBreaking = matchResult[3] === "!";
+      const message = matchResult[4];
+      const prNumber = matchResult[5];
       result += this.parseTemplate(commitsTemplate, {
         ...commit,
         prType,
         prSubtype,
+        prBreaking,
         message,
         prNumber,
       });
@@ -138,7 +140,13 @@ export class Generator {
     while (matchResult) {
       const evaluator = new ExpressionEvaluator(variable);
       const parsedVariable = evaluator.evaluate(matchResult[1].trim());
-      result = result.replace(regex, parsedVariable);
+      // convert boolean to string
+      if (typeof parsedVariable === "boolean")
+        result = result.replace(
+          matchResult[0],
+          parsedVariable ? "true" : "false",
+        );
+      else result = result.replace(regex, parsedVariable);
       matchResult = result.match(regex);
     }
     return result;
