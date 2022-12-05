@@ -29,4 +29,12 @@ describe("Macros test", () => {
     expect(macros.formatDate("2015-03-10T14:09:18Z", "YYYY-MM-DD"));
     expect(() => macros.formatDate("aaa", "YYYY-MM-DD")).toThrowError();
   });
+  test("generateIf", () => {
+    expect(macros.generateIf(true, "test")).toBe("test");
+    expect(macros.generateIf(false, "test")).toBe("");
+  });
+  test("generateIfNot", () => {
+    expect(macros.generateIfNot(true, "test")).toBe("");
+    expect(macros.generateIfNot(false, "test")).toBe("test");
+  });
 });

@@ -1,7 +1,7 @@
 import { macros } from "./macros";
 
 export interface Variable {
-  [key: string]: string | undefined;
+  [key: string]: string | boolean | undefined;
 }
 
 export class ExpressionEvaluator {
@@ -15,7 +15,7 @@ export class ExpressionEvaluator {
    * @param expression The expression to evaluate
    * @returns evaluated expression
    */
-  public evaluate(expression: string): string {
+  public evaluate(expression: string): string | boolean {
     const macroRegex = /([A-Za-z0-9]+)\(([^\n]*)\)/;
     const matchResult = expression.match(macroRegex);
     // is a variable or a string literal
@@ -25,9 +25,12 @@ export class ExpressionEvaluator {
       const parsedVariable = this._variable[expression];
       if (parsedVariable === undefined)
         throw new Error(`Unsupport variable: ${expression}`);
-      if (typeof parsedVariable !== "string")
+      if (
+        typeof parsedVariable !== "string" &&
+        typeof parsedVariable !== "boolean"
+      )
         throw new Error(
-          `Parsed variable is not a string, it should never happen: parsed variable is a ${typeof parsedVariable}`,
+          `Parsed variable is not a string or boolean, it should never happen: parsed variable is a ${typeof parsedVariable}`,
         );
       return parsedVariable;
     }
@@ -55,7 +58,7 @@ export class ExpressionEvaluator {
   private evaluateMacro(macroName: string, macroArgs: string): string {
     const macro = (
       macros as {
-        [x: string]: ((...args: string[]) => string) | undefined;
+        [x: string]: ((...args: (string | boolean)[]) => string) | undefined;
       }
     )[macroName];
     if (macro === undefined) throw new Error(`Unsupport macro: ${macroName}`);

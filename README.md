@@ -94,7 +94,7 @@ Then, create a `template.md` file in your project root directory.
 
 %% commits %%
 
-- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ toSentence(message) }} (#{{ prNumber }})
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
 %% commits %%
 %% changes %%
 <!-- Generate by Release Note -->
