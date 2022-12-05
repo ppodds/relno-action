@@ -142,15 +142,15 @@ generateIfNotEmpty("a", "test"); // test
 
 #### generateIfEmpty
 
-Signature: `generateIfNotEmpty(toBeCheck: string, content: string)`
+Signature: `generateIfEmpty(toBeCheck: string, content: string)`
 
 Generate content if the string is empty.
 
 Examples:
 
 ```typescript
-generateIfNotEmpty("", "test"); // test
-generateIfNotEmpty("a", "test"); // generate nothing
+generateIfEmpty("", "test"); // test
+generateIfEmpty("a", "test"); // generate nothing
 ```
 
 #### formatDate
@@ -164,6 +164,32 @@ Examples:
 ```typescript
 // publishedAt = "2022-01-01T00:00:00Z"
 formatDate(publishedAt, "YYYY-MM-DD"); // 2022-01-01
+```
+
+#### generateIfNot
+
+Signature: `generateIfNot(condition: boolean, content: string)`
+
+Generate content if the condition is `false`.
+
+Examples:
+
+```typescript
+generateIfNot(true, "test"); // generate nothing
+generateIfNot(false, "test"); // test
+```
+
+#### generateIf
+
+Signature: `generateIf(condition: string, content: string)`
+
+Generate content if the condition is `true`.
+
+Examples:
+
+```typescript
+generateIf(true, "test"); // test
+generateIf(false, "test"); // generate nothing
 ```
 
 ### Variables
@@ -246,6 +272,10 @@ If the variable is not defined in the context and you use it, it will throw an e
 - `prSubtype`
   - pull request subtype (extracted from commit message)
   - e.g. `docs(test): a test (#1)` => `test`
+- `prBreaking`
+  - if the pull request is breaking change
+  - return **boolean** value, if you use it in template directly, it will be `true` or `false`
+  - e.g. `feat!: breaking change (#1)` => `true`
 - `prNumber`
   - pull request number (extracted from commit message)
   - e.g. `docs: a test (#1)` => `1`
