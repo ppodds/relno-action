@@ -6,7 +6,7 @@
 ### {{ title }}
 
 %% commits %%
-- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ toSentence(message) }} (#{{ prNumber }})
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
 %% commits %%
 %% changes %%
 <!-- Generate by Release Note -->
