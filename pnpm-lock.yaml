@@ -8,7 +8,7 @@ specifiers:
   '@types/semver': ^7.3.13
   '@typescript-eslint/eslint-plugin': ^5.45.0
   '@typescript-eslint/parser': ^5.30.5
-  '@vercel/ncc': ^0.34.0
+  '@vercel/ncc': ^0.36.0
   date-and-time: ^2.4.1
   eslint: ^8.19.0
   eslint-plugin-github: ^4.3.6
@@ -36,7 +36,7 @@ devDependencies:
   '@types/semver': 7.3.13
   '@typescript-eslint/eslint-plugin': 5.45.0_czs5uoqkd3podpy6vgtsxfc7au
   '@typescript-eslint/parser': 5.45.0_hsf322ms6xhhd4b5ne6lb74y4a
-  '@vercel/ncc': 0.34.0
+  '@vercel/ncc': 0.36.0
   eslint: 8.28.0
   eslint-plugin-github: 4.4.1_hsf322ms6xhhd4b5ne6lb74y4a
   eslint-plugin-jest: 27.1.6_g4s445ihmht4kpk3znm26xsocm
@@ -1117,8 +1117,8 @@ packages:
       eslint-visitor-keys: 3.3.0
     dev: true
 
-  /@vercel/ncc/0.34.0:
-    resolution: {integrity: sha512-G9h5ZLBJ/V57Ou9vz5hI8pda/YQX5HQszCs3AmIus3XzsmRn/0Ptic5otD3xVST8QLKk7AMk7AqpsyQGN7MZ9A==}
+  /@vercel/ncc/0.36.0:
+    resolution: {integrity: sha512-/ZTUJ/ZkRt694k7KJNimgmHjtQcRuVwsST2Z6XfYveQIuBbHR+EqkTc1jfgPkQmMyk/vtpxo3nVxe8CNuau86A==}
     hasBin: true
     dev: true
 
