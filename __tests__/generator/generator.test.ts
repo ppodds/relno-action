@@ -199,4 +199,37 @@ describe("Generator test", () => {
     );
     expect(generator.generate()).toBe("true\nfalse\n");
   });
+  test("Generate twice", () => {
+    const generator = new Generator(
+      [
+        {
+          hash: "d49b398cfca0376c83adb89d25df18f857b901e7",
+          parents:
+            "88d9f36e8aef3f4ecd043511ec5a871775d6c1a5 167616ac2a9defb49e149757f4a865330cec2c4f",
+          date: "2022-11-25T19:15:00+08:00",
+          message: "feat!: edit existed feature (#1)",
+          refs: "HEAD -> master, upstream/master, origin/master, origin/HEAD",
+          body: "",
+          commiterName: "GitHub",
+          commiterEmail: "noreply@github.com",
+          authorName: "ppodds",
+          authorEmail: "oscar20020629@gmail.com",
+        },
+      ],
+      {
+        prTypes: [{ identifier: "feat", title: "🚀 Enhancements" }],
+        template,
+        metadata,
+      },
+    );
+    const result = `## 📝 Changelog
+
+### 🚀 Enhancements
+
+- ⚠️ edit existed feature (#1)
+<!-- Generate by Release Note -->
+`;
+    expect(generator.generate()).toBe(result);
+    expect(generator.generate()).toBe(result);
+  });
 });
