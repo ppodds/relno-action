@@ -1,5 +1,6 @@
 import { error } from "@actions/core";
 import { readFile } from "fs/promises";
+import { join } from "path";
 import { PRType } from "../generator/pr-type";
 
 interface ConfigFile {
@@ -11,13 +12,10 @@ export class Config {
   private _templatePath: string | undefined;
   private _template: string | undefined;
   private _prTypes: PRType[] | undefined;
-  public async load(path = "release-note.json") {
+  public async load(path = "release-note.ts") {
     try {
-      const config: ConfigFile = JSON.parse(
-        await readFile(path, {
-          encoding: "utf-8",
-        }),
-      );
+      const config: ConfigFile = (await import(join(process.cwd(), path)))
+        .default;
       this._templatePath = config.template;
       // convert CRLF to LF
       this._template = (

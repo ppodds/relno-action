@@ -4,7 +4,7 @@ import { Config } from "../../src/config/config";
 describe("config test", () => {
   test("load config", async () => {
     const config = new Config();
-    await config.load("__tests__/data/test-config.json");
+    await config.load("__tests__/data/test-config.ts");
     expect(config.template).toEqual(`## Test
 
 test
