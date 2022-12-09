@@ -64,20 +64,20 @@ Change your repository default pull request title format. You can find it in `Se
 
 ### Setup config file
 
-Create a `release-note.json` file in your project root directory.
+Create a `release-note.ts` file in your project root directory.
 
-```json
-{
-  "template": "template.md",
-  "prTypes": [
-    { "identifier": "feat", "title": "🚀 Enhancements" },
-    { "identifier": "fix", "title": "🩹 Fixes" },
-    { "identifier": "docs", "title": "📖 Documentation" },
-    { "identifier": "chore", "title": "🏡 Chore" },
-    { "identifier": "refactor", "title": "💅 Refactors" },
-    { "identifier": "test", "title": "✅ Tests" }
-  ]
-}
+```typescript
+export default {
+  template: "template.md",
+  prTypes: [
+    { identifier: "feat", title: "🚀 Enhancements" },
+    { identifier: "fix", title: "🩹 Fixes" },
+    { identifier: "docs", title: "📖 Documentation" },
+    { identifier: "chore", title: "🏡 Chore" },
+    { identifier: "refactor", title: "💅 Refactors" },
+    { identifier: "test", title: "✅ Tests" },
+  ],
+};
 ```
 
 `template` is the template file path. We will use this file to generate the release note. `prTypes` is the pull request type configuration. `identifier` is the pull request type identifier. `title` is the pull request type title which would be generated. According above config, if you have a pull request with title `feat: add new feature`, the generated title would be `🚀 Enhancements`
