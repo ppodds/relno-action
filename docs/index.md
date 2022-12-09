@@ -21,7 +21,7 @@
 
 ## Configuration
 
-### `release-note.json`
+### `release-note.ts`
 
 `template`
 
