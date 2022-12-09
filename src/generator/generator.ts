@@ -29,9 +29,11 @@ export interface GeneratorOptions {
 export class Generator {
   private readonly _log: readonly Commit[];
   private readonly _options: GeneratorOptions;
+  private readonly _data: { prType: PRType; commits: Commit[] }[];
   constructor(log: readonly Commit[], options: GeneratorOptions) {
     this._log = log;
     this._options = options;
+    this._data = [];
   }
 
   /**
@@ -39,6 +41,21 @@ export class Generator {
    * @returns The release notes
    */
   public generate(): string {
+    // clear data if already generated
+    if (this._data.length !== 0) this._data.splice(0, this._data.length);
+    // gererate necessary information
+    for (const prType of this._options.prTypes) {
+      const commits = this._log.filter(
+        (commit) =>
+          commit.parents.split(" ").length > 1 &&
+          commit.message.match(
+            new RegExp(
+              `${prType.identifier}(?:\\(.*\\))?!?: .+ \\(#[1-9][0-9]*\\)`,
+            ),
+          ),
+      );
+      this._data.push({ prType, commits });
+    }
     return this.parseGlobalSection();
   }
 
@@ -60,26 +77,16 @@ export class Generator {
   private parseChangesSection(changesTemplate: string): string {
     const section = this.getSection("commits");
     let result = "";
-    for (const prType of this._options.prTypes) {
-      const commits = this._log.filter((commit) => {
-        return (
-          commit.parents.split(" ").length > 1 &&
-          commit.message.match(
-            new RegExp(
-              `${prType.identifier}(?:\\(.*\\))?!?: .+ \\(#[1-9][0-9]*\\)`,
-            ),
-          )
-        );
-      });
-      if (commits.length === 0) continue;
+    for (const entry of this._data) {
+      if (entry.commits.length === 0) continue;
       result += this.parseTemplate(
         this.replaceSection(
           changesTemplate,
           "commits",
           section,
-          this.parseCommitsSection(section, commits),
+          this.parseCommitsSection(section, entry.commits),
         ),
-        { ...prType },
+        { identifier: entry.prType.identifier, title: entry.prType.title },
       );
     }
     return result;
