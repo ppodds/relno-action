@@ -34,6 +34,14 @@ describe("Generator test", () => {
   test("Generate a release note", () => {
     const generator = new Generator(commits, {
       prTypes: [
+        {
+          identifier: "breaking",
+          title: "⚠️ Breaking Changes",
+          filter: (_, commit) =>
+            commit.message.match(
+              /([^()\n!]+)(?:\(.*\))?!: .+ \(#[1-9][0-9]*\)/,
+            ) !== null,
+        },
         { identifier: "feat", title: "🚀 Enhancements" },
         { identifier: "fix", title: "🩹 Fixes" },
         { identifier: "docs", title: "📖 Documentation" },
@@ -46,10 +54,15 @@ describe("Generator test", () => {
     });
     expect(generator.generate()).toBe(`## 📝 Changelog
 
+### ⚠️ Breaking Changes
+
+- ⚠️ breaking change feature (#987)
+
 ### 🚀 Enhancements
 
 - frontend: list UI improvement (#212)
 - search engine friendly CoursesSearch (#199)
+- ⚠️ breaking change feature (#987)
 
 ### 🩹 Fixes
 

@@ -257,4 +257,17 @@ export const commits: readonly Commit[] = [
     authorName: "ppodds",
     authorEmail: "oscar20020629@gmail.com",
   },
+  {
+    hash: "f4da3dfb2fecf0adc21eec883976c652dc3713e2",
+    parents:
+      "49067b1a9efa7fded46d6c4d8747aac9529cdb52 0f7990a7373d34d1b951be459e37333d116d821d",
+    date: "2022-11-22T14:08:57+08:00",
+    message: "feat!: breaking change feature (#987)",
+    refs: "",
+    body: "",
+    commiterName: "GitHub",
+    commiterEmail: "noreply@github.com",
+    authorName: "ppodds",
+    authorEmail: "oscar20020629@gmail.com",
+  },
 ];

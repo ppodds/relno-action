@@ -45,14 +45,17 @@ export class Generator {
     if (this._data.length !== 0) this._data.splice(0, this._data.length);
     // gererate necessary information
     for (const prType of this._options.prTypes) {
-      const commits = this._log.filter(
-        (commit) =>
-          commit.parents.split(" ").length > 1 &&
+      const filter =
+        prType.filter ??
+        ((type: PRType, commit: Commit) =>
           commit.message.match(
             new RegExp(
-              `${prType.identifier}(?:\\(.*\\))?!?: .+ \\(#[1-9][0-9]*\\)`,
+              `${type.identifier}(?:\\(.*\\))?!?: .+ \\(#[1-9][0-9]*\\)`,
             ),
-          ),
+          ) !== null);
+      const commits = this._log.filter(
+        (commit) =>
+          commit.parents.split(" ").length > 1 && filter(prType, commit),
       );
       this._data.push({ prType, commits });
     }
