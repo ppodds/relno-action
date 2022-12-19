@@ -99,3 +99,6 @@ __tests__/runner/*
 
 dist
 .secrets
+
+# generated parser
+src/generator/parser/grammar.ts
