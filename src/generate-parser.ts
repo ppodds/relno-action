@@ -7,7 +7,9 @@ import tspegjs from "ts-pegjs";
 const parserFiles: {
   sourcePath: string;
   options?: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     tspegjs?: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     returnTypes?: any;
   };
   outputPath: string;
