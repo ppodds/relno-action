@@ -1,5 +1,5 @@
 import { describe, test, expect } from "@jest/globals";
-import { parse } from "../../../src/generator/parser/grammar";
+import { parse } from "../../../src/generator/parser/expression-parser";
 import { ASTNodeType } from "../../../src/generator/parser/ast";
 
 describe("Parser test", () => {
