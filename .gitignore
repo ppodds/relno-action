@@ -101,4 +101,5 @@ dist
 .secrets
 
 # generated parser
-src/generator/parser/grammar.ts
+src/generator/parser/expression-parser.ts
+src/generator/parser/template-parser.ts

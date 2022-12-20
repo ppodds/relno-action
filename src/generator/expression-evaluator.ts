@@ -7,7 +7,7 @@ import {
   StringNode,
   VariableNode,
 } from "./parser/ast";
-import { parse } from "./parser/grammar";
+import { parse } from "./parser/expression-parser";
 
 export interface Variable {
   [key: string]: string | boolean | undefined;

@@ -4,32 +4,49 @@ import peggy from "peggy";
 // @ts-ignore
 import tspegjs from "ts-pegjs";
 
-const parser = peggy.generate(
-  readFileSync("src/generator/parser/grammar.pegjs", "utf-8"),
+const parserFiles: {
+  sourcePath: string;
+  options?: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    tspegjs?: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    returnTypes?: any;
+  };
+  outputPath: string;
+}[] = [
   {
+    sourcePath: "src/generator/parser/expression-parser.pegjs",
+    options: {
+      tspegjs: {
+        customHeader: `import { ASTNode, ASTNodeType, BooleanNode, MacroNode, StringNode, VariableNode } from "./ast";`,
+      },
+      returnTypes: {
+        identifier: "string",
+        bool: "BooleanNode",
+        doubleQuotedString: "StringNode",
+        singleQuotedString: "StringNode",
+        string: "StringNode",
+        macroCall: "ASTNode[]",
+        macro: "MacroNode",
+        expression: "ASTNode",
+      },
+    },
+    outputPath: "src/generator/parser/expression-parser.ts",
+  },
+  {
+    sourcePath: "src/generator/parser/template-parser.pegjs",
+    outputPath: "src/generator/parser/template-parser.ts",
+  },
+];
+
+for (const parserFile of parserFiles) {
+  const parser = peggy.generate(readFileSync(parserFile.sourcePath, "utf-8"), {
     output: "source",
     format: "commonjs",
     plugins: [tspegjs],
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    tspegjs: {
-      customHeader: `import { ASTNode, ASTNodeType, BooleanNode, MacroNode, StringNode, VariableNode } from "./ast";`,
-    },
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    returnTypes: {
-      identifier: "string",
-      bool: "BooleanNode",
-      doubleQuotedString: "StringNode",
-      singleQuotedString: "StringNode",
-      string: "StringNode",
-      macroCall: "ASTNode[]",
-      macro: "MacroNode",
-      expression: "ASTNode",
-    },
-  },
-);
-
-writeFileSync("src/generator/parser/grammar.ts", parser, {
-  encoding: "utf-8",
-});
+    ...parserFile.options,
+  });
+  writeFileSync(parserFile.outputPath, parser, {
+    encoding: "utf-8",
+  });
+}

@@ -1,20 +1,20 @@
 expression = macro
     / string
     / bool
-    / identifier {
+    / _ id:identifier _ {
         return {
             type: "Variable",
-            name: text()
+            name: id
         }
     }
-macro = funName:identifier args:macroCall {
+macro = _ funName:identifier args:macroCall _ {
     return {
         type: "Macro",
         funName,
         args: args
     };
 }
-macroCall = "(" arg1:expression? others:(_ "," _ @expression)* ")" {
+macroCall = "(" _ arg1:expression? others:(_ "," _ @expression)* ")" {
     if (arg1) {
         return [arg1, ...others];
     } else {
@@ -22,25 +22,25 @@ macroCall = "(" arg1:expression? others:(_ "," _ @expression)* ")" {
     }
 }
 string = doubleQuotedString / singleQuotedString
-doubleQuotedString = '"' s:[^"]* '"' {
+doubleQuotedString = _ '"' s:[^"]* '"' _ {
     return {
         type: "String",
         value: s.join("")
     }
 }
-singleQuotedString = "'" s:[^']* "'" {
+singleQuotedString = _ "'" s:[^']* "'" _ {
     return {
         type: "String",
         value: s.join("")
     }
 }
-bool = "true" {
+bool = _ "true" _ {
         return {
             type: "Boolean",
             value: true
         }
     }
-    / "false" {
+    / _ "false" _ {
         return {
             type: "Boolean",
             value: false
