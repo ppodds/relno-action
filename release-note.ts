@@ -1,5 +1,5 @@
 export default {
-  template: "template.md",
+  template: "template.rntmd",
   prTypes: [
     {
       identifier: "breaking",

@@ -1,6 +1,8 @@
 import { describe, test, expect } from "@jest/globals";
 import { Generator, ReleaseMetadata } from "../../src/generator/generator";
 import { commits } from "../data/commits";
+import { PRType } from "../../src/generator/pr-type";
+import { Commit } from "../../src/git/log";
 
 const metadata: ReleaseMetadata = {
   authorLogin: "test",
@@ -20,71 +22,123 @@ const metadata: ReleaseMetadata = {
   compareUrl: "https://test.com/compare/1...2",
 };
 const template = `## 📝 Changelog
-%% changes %%
 
+[compare changes]({{ compareUrl }})
+
+<!-- BEGIN breaking SECTION -->
 ### {{ title }}
 
-%% commits %%
-- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ message }} (#{{ prNumber }})
-%% commits %%
-%% changes %%
-<!-- Generate by Release Note -->
-`;
+<!-- BEGIN commits SECTION -->
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END breaking SECTION -->
+<!-- BEGIN feat SECTION -->
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END feat SECTION -->
+<!-- BEGIN fix SECTION -->
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END fix SECTION -->
+<!-- BEGIN docs SECTION -->
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END docs SECTION -->
+<!-- BEGIN chore SECTION -->
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END chore SECTION -->
+<!-- BEGIN refactor SECTION -->
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END refactor SECTION -->
+<!-- BEGIN test SECTION -->
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END test SECTION -->
+<!-- Generate by Release Note -->`;
+const prTypes = [
+  {
+    identifier: "breaking",
+    title: "⚠️ Breaking Changes",
+    filter: (_: PRType, commit: Commit) =>
+      commit.message.match(/([^()\n!]+)(?:\(.*\))?!: .+ \(#[1-9][0-9]*\)/) !==
+      null,
+  },
+  { identifier: "feat", title: "🚀 Enhancements" },
+  { identifier: "fix", title: "🩹 Fixes" },
+  { identifier: "docs", title: "📖 Documentation" },
+  { identifier: "chore", title: "🏡 Chore" },
+  { identifier: "refactor", title: "💅 Refactors" },
+  { identifier: "test", title: "✅ Tests" },
+];
 describe("Generator test", () => {
   test("Generate a release note", () => {
     const generator = new Generator(commits, {
-      prTypes: [
-        {
-          identifier: "breaking",
-          title: "⚠️ Breaking Changes",
-          filter: (_, commit) =>
-            commit.message.match(
-              /([^()\n!]+)(?:\(.*\))?!: .+ \(#[1-9][0-9]*\)/,
-            ) !== null,
-        },
-        { identifier: "feat", title: "🚀 Enhancements" },
-        { identifier: "fix", title: "🩹 Fixes" },
-        { identifier: "docs", title: "📖 Documentation" },
-        { identifier: "chore", title: "🏡 Chore" },
-        { identifier: "refactor", title: "💅 Refactors" },
-        { identifier: "test", title: "✅ Tests" },
-      ],
+      prTypes,
       template,
       metadata,
     });
     expect(generator.generate()).toBe(`## 📝 Changelog
 
+[compare changes](https://test.com/compare/1...2)
+
 ### ⚠️ Breaking Changes
 
-- ⚠️ breaking change feature (#987)
+- Breaking change feature (#987)
 
 ### 🚀 Enhancements
 
-- frontend: list UI improvement (#212)
-- search engine friendly CoursesSearch (#199)
-- ⚠️ breaking change feature (#987)
+- frontend: List UI improvement (#212)
+- Search engine friendly CoursesSearch (#199)
+- ⚠️ Breaking change feature (#987)
 
 ### 🩹 Fixes
 
-- frontend: invalid route in ReviewFrame (#210)
-- frontend: page number isn't reset when changing filter (#203)
-- feedback page params validation (#201)
-- page value is inconsistent (#197)
-- course feedback test failed sometime (#195)
-- show wrong page when user view feedback and back (#192)
-- wrong dev proxy setting (#191)
+- frontend: Invalid route in ReviewFrame (#210)
+- frontend: Page number isn't reset when changing filter (#203)
+- Feedback page params validation (#201)
+- Page value is inconsistent (#197)
+- Course feedback test failed sometime (#195)
+- Show wrong page when user view feedback and back (#192)
+- Wrong dev proxy setting (#191)
 
 ### 🏡 Chore
 
-- remove unnecessary files (#193)
-- deps: update pnpm to v7.17.0 (#190)
+- Remove unnecessary files (#193)
+- deps: Update pnpm to v7.17.0 (#190)
 
 ### 💅 Refactors
 
-- frontend: direct call api endpoint instead of calling wrapper (#207)
-- frontend: paginator state management (#205)
-<!-- Generate by Release Note -->
-`);
+- frontend: Direct call api endpoint instead of calling wrapper (#207)
+- frontend: Paginator state management (#205)
+
+<!-- Generate by Release Note -->`);
   });
   test("Generate with metadata", () => {
     const generator = new Generator([], {
@@ -122,21 +176,20 @@ describe("Generator test", () => {
         },
       ],
       {
-        prTypes: [
-          { identifier: "docs", title: "📖 Documentation" },
-          { identifier: "chore", title: "🏡 Chore" },
-        ],
+        prTypes,
         template,
         metadata,
       },
     );
     expect(generator.generate()).toBe(`## 📝 Changelog
 
+[compare changes](https://test.com/compare/1...2)
+
 ### 🏡 Chore
 
-- docs: update README.md (#1)
-<!-- Generate by Release Note -->
-`);
+- docs: Update README.md (#1)
+
+<!-- Generate by Release Note -->`);
   });
   test("Generate with commit contains breaking change", () => {
     const generator = new Generator(
@@ -156,18 +209,24 @@ describe("Generator test", () => {
         },
       ],
       {
-        prTypes: [{ identifier: "feat", title: "🚀 Enhancements" }],
+        prTypes,
         template,
         metadata,
       },
     );
     expect(generator.generate()).toBe(`## 📝 Changelog
 
+[compare changes](https://test.com/compare/1...2)
+
+### ⚠️ Breaking Changes
+
+- Edit existed feature (#1)
+
 ### 🚀 Enhancements
 
-- ⚠️ edit existed feature (#1)
-<!-- Generate by Release Note -->
-`);
+- ⚠️ Edit existed feature (#1)
+
+<!-- Generate by Release Note -->`);
   });
   test("Generate boolean type variable", () => {
     const generator = new Generator(
@@ -200,13 +259,12 @@ describe("Generator test", () => {
         },
       ],
       {
-        prTypes: [{ identifier: "feat", title: "🚀 Enhancements" }],
-        template: `%% changes %%
-%% commits %%
+        prTypes,
+        template: `<!-- BEGIN feat SECTION -->
+<!-- BEGIN commits SECTION -->
 {{ prBreaking }}
-%% commits %%
-%% changes %%
-`,
+<!-- END commits SECTION -->
+<!-- END feat SECTION -->`,
         metadata,
       },
     );
@@ -230,18 +288,24 @@ describe("Generator test", () => {
         },
       ],
       {
-        prTypes: [{ identifier: "feat", title: "🚀 Enhancements" }],
+        prTypes,
         template,
         metadata,
       },
     );
     const result = `## 📝 Changelog
 
+[compare changes](https://test.com/compare/1...2)
+
+### ⚠️ Breaking Changes
+
+- Edit existed feature (#1)
+
 ### 🚀 Enhancements
 
-- ⚠️ edit existed feature (#1)
-<!-- Generate by Release Note -->
-`;
+- ⚠️ Edit existed feature (#1)
+
+<!-- Generate by Release Note -->`;
     expect(generator.generate()).toBe(result);
     expect(generator.generate()).toBe(result);
   });

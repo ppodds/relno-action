@@ -18,7 +18,7 @@ const parserFiles: {
     sourcePath: "src/generator/parser/expression-parser.pegjs",
     options: {
       tspegjs: {
-        customHeader: `import { ASTNode, ASTNodeType, BooleanNode, MacroNode, StringNode, VariableNode } from "./ast";`,
+        customHeader: `import { ExpressionNode, ExpressionNodeType, BooleanNode, MacroNode, StringNode, VariableNode } from "./expression-ast";`,
       },
       returnTypes: {
         identifier: "string",
@@ -26,16 +26,12 @@ const parserFiles: {
         doubleQuotedString: "StringNode",
         singleQuotedString: "StringNode",
         string: "StringNode",
-        macroCall: "ASTNode[]",
+        macroCall: "ExpressionNode[]",
         macro: "MacroNode",
-        expression: "ASTNode",
+        expression: "ExpressionNode",
       },
     },
     outputPath: "src/generator/parser/expression-parser.ts",
-  },
-  {
-    sourcePath: "src/generator/parser/template-parser.pegjs",
-    outputPath: "src/generator/parser/template-parser.ts",
   },
 ];
 

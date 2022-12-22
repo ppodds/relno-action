@@ -1,11 +1,11 @@
 import { describe, test, expect } from "@jest/globals";
 import { parse } from "../../../src/generator/parser/expression-parser";
-import { ASTNodeType } from "../../../src/generator/parser/ast";
+import { ExpressionNodeType } from "../../../src/generator/parser/expression-ast";
 
-describe("Parser test", () => {
+describe("Expression parser test", () => {
   describe("String literal", () => {
     const expectValue = {
-      type: ASTNodeType.String,
+      type: ExpressionNodeType.String,
       value: "test",
     };
     test("double quote", () => {
@@ -21,11 +21,11 @@ describe("Parser test", () => {
   });
   describe("Boolea literal", () => {
     const trueNode = {
-      type: ASTNodeType.Boolean,
+      type: ExpressionNodeType.Boolean,
       value: true,
     };
     const falseNode = {
-      type: ASTNodeType.Boolean,
+      type: ExpressionNodeType.Boolean,
       value: false,
     };
     test("true", () => {
@@ -41,7 +41,7 @@ describe("Parser test", () => {
   });
   describe("Variable", () => {
     const expectValue = {
-      type: ASTNodeType.Variable,
+      type: ExpressionNodeType.Variable,
       name: "test",
     };
     test("simple variable", () => {
@@ -53,20 +53,20 @@ describe("Parser test", () => {
   });
   describe("Macro", () => {
     const testMacro = {
-      type: ASTNodeType.Macro,
+      type: ExpressionNodeType.Macro,
       funName: "test",
       args: [],
     };
     const mutipleArgsMacro = {
-      type: ASTNodeType.Macro,
+      type: ExpressionNodeType.Macro,
       funName: "generateIfNotEmpty",
       args: [
         {
-          type: ASTNodeType.String,
+          type: ExpressionNodeType.String,
           value: "",
         },
         {
-          type: ASTNodeType.String,
+          type: ExpressionNodeType.String,
           value: "test",
         },
       ],
@@ -76,11 +76,11 @@ describe("Parser test", () => {
     });
     test("Single arg", () => {
       expect(parse("toSentence('test')")).toEqual({
-        type: ASTNodeType.Macro,
+        type: ExpressionNodeType.Macro,
         funName: "toSentence",
         args: [
           {
-            type: ASTNodeType.String,
+            type: ExpressionNodeType.String,
             value: "test",
           },
         ],
@@ -91,19 +91,19 @@ describe("Parser test", () => {
     });
     test("Macro call as a args", () => {
       expect(parse("generateIfNotEmpty('', toSentence('test'))")).toEqual({
-        type: ASTNodeType.Macro,
+        type: ExpressionNodeType.Macro,
         funName: "generateIfNotEmpty",
         args: [
           {
-            type: ASTNodeType.String,
+            type: ExpressionNodeType.String,
             value: "",
           },
           {
-            type: ASTNodeType.Macro,
+            type: ExpressionNodeType.Macro,
             funName: "toSentence",
             args: [
               {
-                type: ASTNodeType.String,
+                type: ExpressionNodeType.String,
                 value: "test",
               },
             ],

@@ -1,12 +1,12 @@
 import { macros } from "./macros";
 import {
-  ASTNode,
-  ASTNodeType,
+  ExpressionNode,
+  ExpressionNodeType,
   BooleanNode,
   MacroNode,
   StringNode,
   VariableNode,
-} from "./parser/ast";
+} from "./parser/expression-ast";
 import { parse } from "./parser/expression-parser";
 
 export interface Variable {
@@ -34,15 +34,15 @@ export class ExpressionEvaluator {
    * @param ast The expression ASTNode need to be evaluate
    * @returns evaluated result
    */
-  public evaluateAST(ast: ASTNode): string | boolean {
+  public evaluateAST(ast: ExpressionNode): string | boolean {
     switch (ast.type) {
-      case ASTNodeType.Macro:
+      case ExpressionNodeType.Macro:
         return this.evaluateMacro(ast as MacroNode);
-      case ASTNodeType.String:
+      case ExpressionNodeType.String:
         return (ast as StringNode).value;
-      case ASTNodeType.Boolean:
+      case ExpressionNodeType.Boolean:
         return (ast as BooleanNode).value;
-      case ASTNodeType.Variable: {
+      case ExpressionNodeType.Variable: {
         const parsedVariable = this._variable[(ast as VariableNode).name];
         if (parsedVariable === undefined)
           throw new Error(`Unsupport variable: ${(ast as VariableNode).name}`);

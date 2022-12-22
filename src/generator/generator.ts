@@ -59,42 +59,64 @@ export class Generator {
       );
       this._data.push({ prType, commits });
     }
-    return this.parseGlobalSection();
+    return this.parseDefaultSection();
   }
 
-  private parseGlobalSection(): string {
-    const section = this.getSection("changes");
-    return this.parseTemplate(
-      this.replaceSection(
-        this._options.template,
-        "changes",
-        section,
-        this.parseChangesSection(section),
-      ),
-      {
-        ...this._options.metadata,
-      },
-    );
-  }
-
-  private parseChangesSection(changesTemplate: string): string {
-    const section = this.getSection("commits");
-    let result = "";
+  /**
+   * Parse the default template
+   * @returns Parsed default template
+   */
+  private parseDefaultSection(): string {
+    let result = this._options.template;
     for (const entry of this._data) {
-      if (entry.commits.length === 0) continue;
-      result += this.parseTemplate(
-        this.replaceSection(
-          changesTemplate,
-          "commits",
-          section,
-          this.parseCommitsSection(section, entry.commits),
-        ),
-        { identifier: entry.prType.identifier, title: entry.prType.title },
+      const section = this.getSection(
+        this._options.template,
+        entry.prType.identifier,
+      );
+      result = this.replaceSection(
+        result,
+        entry.prType.identifier,
+        this.parsePRTypeSection(section, entry),
       );
     }
+    result = this.parseTemplate(result, {
+      ...this._options.metadata,
+    });
     return result;
   }
 
+  /**
+   * Parse the PRType template
+   * @param prTypeTemplate The PRType section template
+   * @param data The PRType data
+   * @returns Parsed PRType section
+   */
+  private parsePRTypeSection(
+    prTypeTemplate: string,
+    data: {
+      prType: PRType;
+      commits: Commit[];
+    },
+  ): string {
+    if (data.commits.length === 0) return "";
+    const section = this.getSection(prTypeTemplate, "commits");
+    const parsedSection = this.replaceSection(
+      prTypeTemplate,
+      "commits",
+      this.parseCommitsSection(section, data.commits),
+    );
+    return this.parseTemplate(parsedSection, {
+      title: data.prType.title,
+      identifier: data.prType.identifier,
+    });
+  }
+
+  /**
+   * Parse the commit template
+   * @param commitsTemplate The commit section template
+   * @param commits Commits data
+   * @returns Parsed commits section
+   */
   private parseCommitsSection(
     commitsTemplate: string,
     commits: Commit[],
@@ -121,28 +143,39 @@ export class Generator {
     return result;
   }
 
-  public getSection(section: string) {
-    const regex = new RegExp(
-      `%% *${section} *%% *\n((.|\r|\n)*)%% *${section} *%% *`,
-    );
-    const result = this._options.template.match(regex);
+  /**
+   * Get the section content from specified section name
+   * @param template The template to parse
+   * @param sectionName The section name
+   * @returns The section content
+   */
+  private getSection(template: string, sectionName: string) {
+    const result = template.match(this.buildSectionRegex(sectionName));
     if (!result) return "";
     return result[1];
   }
 
+  /**
+   * Replace the section in the template
+   * @param template The template to process
+   * @param sectionName The name of the section to be replaced
+   * @param parsedSection The parsed section which will replace the original section
+   * @returns The processed template
+   */
   private replaceSection(
     template: string,
     sectionName: string,
-    sectionContent: string,
     parsedSection: string,
   ) {
-    const newTemplate = template.replace(
-      new RegExp(`%% *${sectionName} *%%\n`, "g"),
-      "",
-    );
-    return newTemplate.replace(sectionContent, parsedSection);
+    return template.replace(this.buildSectionRegex(sectionName), parsedSection);
   }
 
+  /**
+   * Parse the template with variables
+   * @param template The template to parse
+   * @param variable Variables in this scope
+   * @returns The parsed template
+   */
   private parseTemplate(template: string, variable: Variable): string {
     const regex = /{{([^\n}}]*)}}/;
     let matchResult = template.match(regex);
@@ -160,5 +193,16 @@ export class Generator {
       matchResult = result.match(regex);
     }
     return result;
+  }
+
+  /**
+   * Build the section regex
+   * @param sectionName The name of the section
+   * @returns section regex
+   */
+  private buildSectionRegex(sectionName: string) {
+    return new RegExp(
+      `<!--[ \t]*BEGIN[ \t]*${sectionName}[ \t]*SECTION[ \t]*-->[ \t]*\n((.|\r|\n)*)<!--[ \t]*END[ \t]*${sectionName}[ \t]*SECTION[ \t]*-->[ \t]*\n?`,
+    );
   }
 }

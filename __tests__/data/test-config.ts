@@ -1,5 +1,5 @@
 export default {
-  template: "__tests__/data/test-template.md",
+  template: "__tests__/data/test-template.rntmd",
   prTypes: [
     { identifier: "feat", title: "🚀 Enhancements" },
     { identifier: "fix", title: "🩹 Fixes" },
