@@ -68,8 +68,15 @@ Create a `release-note.ts` file in your project root directory.
 
 ```typescript
 export default {
-  template: "template.md",
+  template: "template.rntmd",
   prTypes: [
+    {
+      identifier: "breaking",
+      title: "⚠️ Breaking Changes",
+      filter: (_: any, commit: any) =>
+        commit.message.match(/([^()\n!]+)(?:\(.*\))?!: .+ \(#[1-9][0-9]*\)/) !==
+        null,
+    },
     { identifier: "feat", title: "🚀 Enhancements" },
     { identifier: "fix", title: "🩹 Fixes" },
     { identifier: "docs", title: "📖 Documentation" },
@@ -82,25 +89,87 @@ export default {
 
 `template` is the template file path. We will use this file to generate the release note. `prTypes` is the pull request type configuration. `identifier` is the pull request type identifier. `title` is the pull request type title which would be generated. According above config, if you have a pull request with title `feat: add new feature`, the generated title would be `🚀 Enhancements`
 
-Then, create a `template.md` file in your project root directory.
+Then, create a `template.rntmd` file in your project root directory.
 
 ```markdown
 ## 📝 Changelog
 
 [compare changes]({{ compareUrl }})
-%% changes %%
+
+<!-- BEGIN breaking SECTION -->
 
 ### {{ title }}
 
-%% commits %%
+<!-- BEGIN commits SECTION -->
+
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END breaking SECTION -->
+<!-- BEGIN feat SECTION -->
+
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
 
 - {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
-%% commits %%
-%% changes %%
+<!-- END commits SECTION -->
+
+<!-- END feat SECTION -->
+<!-- BEGIN fix SECTION -->
+
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END fix SECTION -->
+<!-- BEGIN docs SECTION -->
+
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END docs SECTION -->
+<!-- BEGIN chore SECTION -->
+
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END chore SECTION -->
+<!-- BEGIN refactor SECTION -->
+
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END refactor SECTION -->
+<!-- BEGIN test SECTION -->
+
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END test SECTION -->
 <!-- Generate by Release Note -->
 ```
 
-You might notice that there are some special syntax in the template file. `{{ }}` is the expression syntax. `release-note` would replace it with the specified variable or macro, even a string literal. `%% %%` is the section tag syntax. `release-note` need this to know where the content should be inserted.
+You might notice that there are some special syntax in the template file. `{{ }}` is the expression syntax. `release-note` would replace it with the specified variable or macro, even a string literal. `<!-- BEGIN commits SECTION -->` and `<!-- END commits SECTION -->` is the section syntax. `release-note` need this to know where the content should be inserted.
 
 ### Install release-note
 
@@ -119,7 +188,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: ppodds/release-note@v0
+      - uses: ppodds/release-note@v1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 ```

@@ -75,16 +75,17 @@ macro -> [A-Za-z0-9]+\([^\n]*\)
 variable -> [A-Za-z0-9]+
 ```
 
-### Section Tag
+### Section Syntax
 
-Syntax: `%% section %%` (need two tags to define a section)
+Begin Syntax: `<!-- BEGIN section SECTION -->`
+End Syntax: `<!-- END section SECTION -->`
 
 Examples:
 
 ```
-%% changes %%
-This is a changes section.
-%% changes %%
+<!-- BEGIN test SECTION -->
+This is a test section.
+<!-- END test SECTION -->
 ```
 
 You can use section tag to define a section in your template file.
@@ -92,10 +93,12 @@ You can use section tag to define a section in your template file.
 Available sections:
 
 - `default`
-  - `changes`
+  - `PR type` (change to your defined PR type identifier)
     - `commits`
 
-> **Note**: `default` section is not a real section, it is the default context of the template file. You can not use it like this: `%% default %%`.
+If you still confused about the section syntax, you can view our [template file](../template.rntmd)
+
+> **Note**: `default` section is not a real section, it is the default context of the template file.
 
 ## Macros and Variables
 
