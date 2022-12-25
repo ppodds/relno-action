@@ -1,6 +1,3 @@
-import { Generator, ReleaseMetadata } from "./generator/generator";
-import { compareCommit } from "./git/log";
-import { Config } from "./config/config";
 import {
   debug,
   endGroup,
@@ -11,8 +8,8 @@ import {
   startGroup,
 } from "@actions/core";
 import { context } from "@actions/github";
-import { getEndVersion, getStartVersion } from "./git/version";
-import { setReleaseNote } from "./github/release";
+import { Config, Generator, ReleaseMetadata, compareCommit } from "relno";
+import { setReleaseNote, getEndVersion, getStartVersion } from "./github";
 
 /**
  * Check if the runtime is valid

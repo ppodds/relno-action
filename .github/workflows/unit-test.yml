@@ -18,8 +18,6 @@ jobs:
           cache: "pnpm"
       - name: Install dependencies
         run: pnpm i
-      - name: Generate parser
-        run: pnpm grammar
       - name: Run unit tests
         run: pnpm test
       - name: Run linter
