@@ -99,7 +99,3 @@ __tests__/runner/*
 
 dist
 .secrets
-
-# generated parser
-src/generator/parser/expression-parser.ts
-src/generator/parser/template-parser.ts
