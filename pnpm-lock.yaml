@@ -18,6 +18,7 @@ specifiers:
   lint-staged: ^13.0.4
   peggy: ^2.0.1
   prettier: 2.8.1
+  relno: 0.0.0-alpha.0
   semver: ^7.3.8
   simple-git: ^3.15.0
   ts-jest: ^29.0.0
@@ -30,6 +31,7 @@ dependencies:
   '@actions/github': 5.1.1
   date-and-time: 2.4.1
   peggy: 2.0.1
+  relno: 0.0.0-alpha.0
   semver: 7.3.8
   simple-git: 3.15.0
   ts-pegjs: 2.1.0_peggy@2.0.1
@@ -3610,6 +3612,17 @@ packages:
     resolution: {integrity: sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==}
     engines: {node: '>=8'}
     dev: true
+
+  /relno/0.0.0-alpha.0:
+    resolution: {integrity: sha512-Eh3Fmg8N3PxTaGzdW+hZncMO2lb+9MnmHs5rzCzTryS3blBvN7aIIb2OVksNvg7hRz7Zd73MglIZjLObyRpmxw==}
+    dependencies:
+      date-and-time: 2.4.1
+      peggy: 2.0.1
+      simple-git: 3.15.0
+      ts-pegjs: 2.1.0_peggy@2.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /require-directory/2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
