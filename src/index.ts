@@ -68,7 +68,7 @@ async function run() {
       metadata,
     });
     info("Generating changelog");
-    const result = generator.generate();
+    const result = await generator.generate();
     info(`Generated release note:\n${result}`);
     debug(`${context.payload}`);
     if (

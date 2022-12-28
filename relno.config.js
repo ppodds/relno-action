@@ -1,4 +1,6 @@
-export default {
+const { defineRelnoConfig } = require("relno");
+
+module.exports = defineRelnoConfig({
   template: "template.rntmd",
   prTypes: [
     {
@@ -15,4 +17,4 @@ export default {
     { identifier: "refactor", title: "💅 Refactors" },
     { identifier: "test", title: "✅ Tests" },
   ],
-};
+});

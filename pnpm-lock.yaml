@@ -18,7 +18,7 @@ specifiers:
   lint-staged: ^13.0.4
   peggy: ^2.0.1
   prettier: 2.8.1
-  relno: 0.0.0-alpha.0
+  relno: 0.0.0-alpha.3
   semver: ^7.3.8
   simple-git: ^3.15.0
   ts-jest: ^29.0.0
@@ -31,7 +31,7 @@ dependencies:
   '@actions/github': 5.1.1
   date-and-time: 2.4.1
   peggy: 2.0.1
-  relno: 0.0.0-alpha.0
+  relno: 0.0.0-alpha.3
   semver: 7.3.8
   simple-git: 3.15.0
   ts-pegjs: 2.1.0_peggy@2.0.1
@@ -3613,8 +3613,8 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /relno/0.0.0-alpha.0:
-    resolution: {integrity: sha512-Eh3Fmg8N3PxTaGzdW+hZncMO2lb+9MnmHs5rzCzTryS3blBvN7aIIb2OVksNvg7hRz7Zd73MglIZjLObyRpmxw==}
+  /relno/0.0.0-alpha.3:
+    resolution: {integrity: sha512-PVpLhA/MkDEI+KCYu8bPNG0pM3Aixz/h/HoxhyP1FHsg9P30pOWF/9LD8jzoghtw6tGMFhhzy5jpFiBq64J5jQ==}
     dependencies:
       date-and-time: 2.4.1
       peggy: 2.0.1
