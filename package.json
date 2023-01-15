@@ -1,6 +1,6 @@
 {
   "name": "relno-action",
-  "version": "1.0.0-alpha.1",
+  "version": "1.0.0-alpha.2",
   "private": true,
   "description": "A fully configurable release note generation framework. Allow you to automatically generate a beautiful release note from commit messages and pull requests.",
   "main": "dist/index.js",
