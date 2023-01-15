@@ -9,7 +9,6 @@ specifiers:
   '@typescript-eslint/eslint-plugin': ^5.45.0
   '@typescript-eslint/parser': ^5.30.5
   '@vercel/ncc': ^0.36.0
-  date-and-time: ^2.4.1
   eslint: ^8.19.0
   eslint-plugin-github: ^4.3.6
   eslint-plugin-jest: ^27.0.0
@@ -17,6 +16,8 @@ specifiers:
   jest: ^29.0.0
   lint-staged: ^13.0.4
   prettier: 2.8.1
+  relno: 0.0.0-alpha.4
+  relno-plugin-contributor: 0.0.0-alpha.4
   semver: ^7.3.8
   simple-git: ^3.15.0
   ts-jest: ^29.0.0
@@ -26,7 +27,7 @@ specifiers:
 dependencies:
   '@actions/core': 1.10.0
   '@actions/github': 5.1.1
-  date-and-time: 2.4.1
+  relno: 0.0.0-alpha.4
   semver: 7.3.8
   simple-git: 3.15.0
 
@@ -44,6 +45,7 @@ devDependencies:
   jest: 29.3.1_j5wyyouvf5aixckc7ltaxrydha
   lint-staged: 13.0.4
   prettier: 2.8.1
+  relno-plugin-contributor: 0.0.0-alpha.4
   ts-jest: 29.0.3_4f6uxrzmuwipl5rr3bcogf6k74
   ts-node: 10.9.1_eoe7put6ewfbqpy6gs36tihw6y
   typescript: 4.9.3
@@ -756,11 +758,9 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /@kwsites/promise-deferred/1.1.1:
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
-    dev: false
 
   /@nodelib/fs.scandir/2.1.5:
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -1526,7 +1526,6 @@ packages:
   /commander/9.4.1:
     resolution: {integrity: sha512-5EEkTNyHNGFPD2H+c/dXXfQZYa/scCKasxWcXJaWnNJ99pnQN9Vnmqow+p+PlFPE63Q6mThaZws1T+HxfpgtPw==}
     engines: {node: ^12.20.0 || >=14}
-    dev: true
 
   /concat-map/0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
@@ -1564,7 +1563,6 @@ packages:
 
   /date-and-time/2.4.1:
     resolution: {integrity: sha512-fG+ClATev+wHryqxOoGcTTegr5RhYE+tz/XHUkTQ/zvpWqQ90oOxjOhuMQ02bw87Oy9N3qBENCHHHSKdWJjgTg==}
-    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -3506,6 +3504,14 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /peggy/2.0.1:
+    resolution: {integrity: sha512-mBqfmdUAOVn7RILpXTbcRBhLfTR4Go0SresSnivGDdRylBOyVFJncFiVyCNNpPWq8HmgeRleXHs/Go4o8kQVXA==}
+    engines: {node: '>=10'}
+    hasBin: true
+    dependencies:
+      commander: 9.4.1
+      source-map-generator: 0.8.0
+
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
     dev: true
@@ -3598,6 +3604,24 @@ packages:
     resolution: {integrity: sha512-pq2bWo9mVD43nbts2wGv17XLiNLya+GklZ8kaDLV2Z08gDCsGpnKn9BFMepvWuHCbyVvY7J5o5+BVvoQbmlJLg==}
     engines: {node: '>=8'}
     dev: true
+
+  /relno-plugin-contributor/0.0.0-alpha.4:
+    resolution: {integrity: sha512-N5eIfGErACNT1SciwrOxJzTh1nzALC+F08ETkUQGTFus/vaZOAVTrhHMYXACL2dzme6oaMKo9cABkrKJT7uIfw==}
+    dependencies:
+      relno: 0.0.0-alpha.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /relno/0.0.0-alpha.4:
+    resolution: {integrity: sha512-ii+l6nbC9O8g/eIiSKVDb8pWp8CaiVVZSDZfnoaMarbsb57W4SXFET9py4Psz0dKfdLOH91L7VMWfSQGUtR5JQ==}
+    dependencies:
+      date-and-time: 2.4.1
+      peggy: 2.0.1
+      simple-git: 3.15.0
+      ts-pegjs: 3.0.0_peggy@2.0.1
+    transitivePeerDependencies:
+      - supports-color
 
   /require-directory/2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -3723,7 +3747,6 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
-    dev: false
 
   /sisteransi/1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
@@ -3759,6 +3782,10 @@ packages:
       ansi-styles: 6.2.1
       is-fullwidth-code-point: 4.0.0
     dev: true
+
+  /source-map-generator/0.8.0:
+    resolution: {integrity: sha512-psgxdGMwl5MZM9S3FWee4EgsEaIjahYV5AzGnwUvPhWeITz/j6rKpysQHlQ4USdxvINlb8lKfWGIXwfkrgtqkA==}
+    engines: {node: '>= 10'}
 
   /source-map-support/0.5.13:
     resolution: {integrity: sha512-SHSKFHadjVA5oR4PPqhtAVdcBWwRYVd6g6cAXnIbRiIwc2EhPrTuKUBdSLvlEKyIP3GCf89fltvcZiP9MMFA1w==}
@@ -3999,6 +4026,14 @@ packages:
       v8-compile-cache-lib: 3.0.1
       yn: 3.1.1
     dev: true
+
+  /ts-pegjs/3.0.0_peggy@2.0.1:
+    resolution: {integrity: sha512-0yTchsO04jfYl/85sibupLSb7PfXs890jN9WqXoI6+WrFilam3+44ZdjBwIKPc9n2jdSbcxfdMvXNNwNEHSLCg==}
+    hasBin: true
+    peerDependencies:
+      peggy: ^2.0.1
+    dependencies:
+      peggy: 2.0.1
 
   /tsconfig-paths/3.14.1:
     resolution: {integrity: sha512-fxDhWnFSLt3VuTwtvJt5fpwxBHg5AdKWMsgcPOOIilyjymcYVZoCQF8fvFRezCNfblEXmi+PcM1eYHeOAgXCOQ==}

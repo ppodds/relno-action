@@ -1,0 +1,26 @@
+## 📝 Changelog
+
+[compare changes]({{ compareUrl }})
+
+<!-- BEGIN breaking SECTION -->
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END breaking SECTION -->
+<!-- BEGIN feat, fix, docs, chore, refactor, test SECTION -->
+### {{ title }}
+
+<!-- BEGIN commits SECTION -->
+- {{ prSubtype }}{{ generateIfNotEmpty(prSubtype, ": ") }}{{ generateIf(prBreaking, "⚠️ ") }}{{ toSentence(message) }} (#{{ prNumber }})
+<!-- END commits SECTION -->
+
+<!-- END feat, fix, docs, chore, refactor, test SECTION -->
+### ❤️ Contributors
+
+<!-- BEGIN contributors SECTION -->
+- {{ contributorName }}
+<!-- END contributors SECTION -->
+<!-- Generate by Release Note -->
