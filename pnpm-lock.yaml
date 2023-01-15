@@ -16,8 +16,8 @@ specifiers:
   jest: ^29.0.0
   lint-staged: ^13.0.4
   prettier: 2.8.1
-  relno: 0.0.0-alpha.4
-  relno-plugin-contributor: 0.0.0-alpha.4
+  relno: 0.0.0
+  relno-plugin-contributor: 0.0.0
   semver: ^7.3.8
   simple-git: ^3.15.0
   ts-jest: ^29.0.0
@@ -27,7 +27,7 @@ specifiers:
 dependencies:
   '@actions/core': 1.10.0
   '@actions/github': 5.1.1
-  relno: 0.0.0-alpha.4
+  relno: 0.0.0
   semver: 7.3.8
   simple-git: 3.15.0
 
@@ -45,7 +45,7 @@ devDependencies:
   jest: 29.3.1_j5wyyouvf5aixckc7ltaxrydha
   lint-staged: 13.0.4
   prettier: 2.8.1
-  relno-plugin-contributor: 0.0.0-alpha.4
+  relno-plugin-contributor: 0.0.0
   ts-jest: 29.0.3_4f6uxrzmuwipl5rr3bcogf6k74
   ts-node: 10.9.1_eoe7put6ewfbqpy6gs36tihw6y
   typescript: 4.9.3
@@ -3605,16 +3605,16 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
-  /relno-plugin-contributor/0.0.0-alpha.4:
-    resolution: {integrity: sha512-N5eIfGErACNT1SciwrOxJzTh1nzALC+F08ETkUQGTFus/vaZOAVTrhHMYXACL2dzme6oaMKo9cABkrKJT7uIfw==}
+  /relno-plugin-contributor/0.0.0:
+    resolution: {integrity: sha512-vaTOGK1CeFPBqzvXJEDcPaDV/X3E3M3Df58aMRv7vgJnqs0WResXReXFuwQ1hTum4vfpHAOw1dPlredDUrvpPA==}
     dependencies:
-      relno: 0.0.0-alpha.4
+      relno: 0.0.0
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /relno/0.0.0-alpha.4:
-    resolution: {integrity: sha512-ii+l6nbC9O8g/eIiSKVDb8pWp8CaiVVZSDZfnoaMarbsb57W4SXFET9py4Psz0dKfdLOH91L7VMWfSQGUtR5JQ==}
+  /relno/0.0.0:
+    resolution: {integrity: sha512-LqCzloOaGVCNp1keOdTi+5nclHswdg1BrbEQ7xUy/cvIctkHNX2gCu+sP9C34KN9J62RHRXAXbXEUKjRnZdc5A==}
     dependencies:
       date-and-time: 2.4.1
       peggy: 2.0.1
