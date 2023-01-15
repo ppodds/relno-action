@@ -16,7 +16,7 @@ specifiers:
   jest: ^29.0.0
   lint-staged: ^13.0.4
   prettier: 2.8.1
-  relno: 0.0.0
+  relno: 0.0.0-alpha.4
   relno-plugin-contributor: 0.0.0
   semver: ^7.3.8
   simple-git: ^3.15.0
@@ -27,7 +27,7 @@ specifiers:
 dependencies:
   '@actions/core': 1.10.0
   '@actions/github': 5.1.1
-  relno: 0.0.0
+  relno: 0.0.0-alpha.4
   semver: 7.3.8
   simple-git: 3.15.0
 
@@ -3622,6 +3622,18 @@ packages:
       ts-pegjs: 3.0.0_peggy@2.0.1
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /relno/0.0.0-alpha.4:
+    resolution: {integrity: sha512-ii+l6nbC9O8g/eIiSKVDb8pWp8CaiVVZSDZfnoaMarbsb57W4SXFET9py4Psz0dKfdLOH91L7VMWfSQGUtR5JQ==}
+    dependencies:
+      date-and-time: 2.4.1
+      peggy: 2.0.1
+      simple-git: 3.15.0
+      ts-pegjs: 3.0.0_peggy@2.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /require-directory/2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
