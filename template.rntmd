@@ -18,4 +18,9 @@
 <!-- END commits SECTION -->
 
 <!-- END feat, fix, docs, chore, refactor, test SECTION -->
+### ❤️ Contributors
+
+<!-- BEGIN contributors SECTION -->
+- {{ contributorName }}
+<!-- END contributors SECTION -->
 <!-- Generate by Release Note -->

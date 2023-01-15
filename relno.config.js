@@ -1,4 +1,5 @@
 const { defineRelnoConfig } = require("relno");
+const { RelnoContributorPlugin } = require("relno-plugin-contributor");
 
 module.exports = defineRelnoConfig({
   template: "template.rntmd",
@@ -17,4 +18,5 @@ module.exports = defineRelnoConfig({
     { identifier: "refactor", title: "💅 Refactors" },
     { identifier: "test", title: "✅ Tests" },
   ],
+  plugins: [RelnoContributorPlugin],
 });
