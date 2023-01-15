@@ -66,6 +66,7 @@ async function run() {
       template: config.template ?? "",
       prTypes: config.prTypes ?? [],
       metadata,
+      plugins: config.plugins,
     });
     info("Generating changelog");
     const result = await generator.generate();
