@@ -1,4 +1,4 @@
-name: "Relno"
+name: "relno-action"
 description: "A GitHub action that creates release notes from commit messages and pull requests. Fully customizable to meet your needs."
 author: "ppodds"
 inputs:
