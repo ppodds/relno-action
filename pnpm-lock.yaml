@@ -18,8 +18,8 @@ dependencies:
     specifier: ^7.5.4
     version: 7.5.4
   simple-git:
-    specifier: ^3.19.0
-    version: 3.19.0
+    specifier: ^3.19.1
+    version: 3.19.1
 
 devDependencies:
   '@jest/globals':
@@ -3946,7 +3946,7 @@ packages:
     dependencies:
       date-and-time: 3.0.0
       peggy: 3.0.2
-      simple-git: 3.19.0
+      simple-git: 3.19.1
       ts-pegjs: 4.2.1(peggy@3.0.2)
     transitivePeerDependencies:
       - supports-color
@@ -4059,8 +4059,8 @@ packages:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
     dev: true
 
-  /simple-git@3.19.0:
-    resolution: {integrity: sha512-hyH2p9Ptxjf/xPuL7HfXbpYt9gKhC1yWDh3KYIAYJJePAKV7AEjLN4xhp7lozOdNiaJ9jlVvAbBymVlcS2jRiA==}
+  /simple-git@3.19.1:
+    resolution: {integrity: sha512-Ck+rcjVaE1HotraRAS8u/+xgTvToTuoMkT9/l9lvuP5jftwnYUp6DwuJzsKErHgfyRk8IB8pqGHWEbM3tLgV1w==}
     dependencies:
       '@kwsites/file-exists': 1.1.1
       '@kwsites/promise-deferred': 1.1.1
