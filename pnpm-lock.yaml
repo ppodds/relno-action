@@ -3955,18 +3955,6 @@ packages:
       ts-pegjs: 4.2.1(peggy@3.0.2)
     transitivePeerDependencies:
       - supports-color
-    dev: false
-
-  /relno@0.1.1:
-    resolution: {integrity: sha512-dFRV+pD9ilbR+s8IEFMiAVY8aFgl34sgotd4rubBhQ8OA9Wx4cyR7CUrjQFA7OU6JD6j0ULLi9WnBbl4FZkptQ==}
-    dependencies:
-      date-and-time: 3.0.2
-      peggy: 3.0.2
-      simple-git: 3.19.1
-      ts-pegjs: 4.2.1(peggy@3.0.2)
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
 
   /require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
