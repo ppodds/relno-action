@@ -12,8 +12,8 @@ dependencies:
     specifier: ^5.1.1
     version: 5.1.1
   relno:
-    specifier: ^0.1.0
-    version: 0.1.0
+    specifier: ^0.1.1
+    version: 0.1.1
   semver:
     specifier: ^7.5.4
     version: 7.5.4
@@ -3941,13 +3941,13 @@ packages:
   /relno-plugin-contributor@0.1.0:
     resolution: {integrity: sha512-bzVeFXSSFOHbY0mE277DdP1vMVfZjobas+jg2xfZxiB0SXeD6sacZG3yPLvXCRnUDofGsasXdVVxA5S5IcAtfQ==}
     dependencies:
-      relno: 0.1.0
+      relno: 0.1.1
     transitivePeerDependencies:
       - supports-color
     dev: true
 
-  /relno@0.1.0:
-    resolution: {integrity: sha512-tb2AwSy7u0NX59aVOfG7NBFlTk/o1M9JrBBUzwPm2XhOFI/4zayCHRIcIJQeA3A+eslI5JKLQe5lUyfK7fR7+A==}
+  /relno@0.1.1:
+    resolution: {integrity: sha512-dFRV+pD9ilbR+s8IEFMiAVY8aFgl34sgotd4rubBhQ8OA9Wx4cyR7CUrjQFA7OU6JD6j0ULLi9WnBbl4FZkptQ==}
     dependencies:
       date-and-time: 3.0.2
       peggy: 3.0.2
