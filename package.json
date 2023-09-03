@@ -30,7 +30,7 @@
     "@actions/github": "^5.1.1",
     "relno": "^0.1.0",
     "semver": "^7.5.4",
-    "simple-git": "^3.19.0"
+    "simple-git": "^3.19.1"
   },
   "devDependencies": {
     "@jest/globals": "^29.5.0",
