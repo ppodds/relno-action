@@ -24,7 +24,7 @@
     "release",
     "release note"
   ],
-  "packageManager": "pnpm@8.7.1",
+  "packageManager": "pnpm@8.11.0",
   "dependencies": {
     "@actions/core": "^1.10.0",
     "@actions/github": "^5.1.1",
