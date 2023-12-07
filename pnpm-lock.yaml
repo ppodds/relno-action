@@ -12,8 +12,8 @@ dependencies:
     specifier: ^5.1.1
     version: 5.1.1
   relno:
-    specifier: ^0.1.1
-    version: 0.1.1
+    specifier: ^1.0.0
+    version: 1.0.0
   semver:
     specifier: ^7.5.4
     version: 7.5.4
@@ -1732,6 +1732,11 @@ packages:
 
   /date-and-time@3.0.2:
     resolution: {integrity: sha512-MOqlRertOQmQI7ySbz6dKLM7Rxm9dgcPuBI9IL7NVe0UGqHPK+6hWSKVhLrVHxlSgQQtocE2R7+HFOf5aMz8vw==}
+    dev: true
+
+  /date-and-time@3.0.3:
+    resolution: {integrity: sha512-CmHCeTixc3KA5pcLTVs9JCFhmJMFTBsmSsgHnNed4YDNw9yUOrjjRn3zALy8eMgqmTO+4U8k5jl1peC7IoezfA==}
+    dev: false
 
   /debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -4000,6 +4005,18 @@ packages:
       ts-pegjs: 4.2.1(peggy@3.0.2)
     transitivePeerDependencies:
       - supports-color
+    dev: true
+
+  /relno@1.0.0:
+    resolution: {integrity: sha512-rTYt0HTQUW/Vj6dN1T3zJ8YWqHj90VNr+scqFPLwNrgNIhglYS9IQlBM/5WUFFjnYio3X9L2r07CdREPg36mhw==}
+    dependencies:
+      date-and-time: 3.0.3
+      peggy: 3.0.2
+      simple-git: 3.21.0
+      ts-pegjs: 4.2.1(peggy@3.0.2)
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -4134,6 +4151,16 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
+
+  /simple-git@3.21.0:
+    resolution: {integrity: sha512-oTzw9248AF5bDTMk9MrxsRzEzivMlY+DWH0yWS4VYpMhNLhDWnN06pCtaUyPnqv/FpsdeNmRqmZugMABHRPdDA==}
+    dependencies:
+      '@kwsites/file-exists': 1.1.1
+      '@kwsites/promise-deferred': 1.1.1
+      debug: 4.3.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
 
   /sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
