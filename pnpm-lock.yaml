@@ -62,8 +62,8 @@ devDependencies:
     specifier: 3.0.3
     version: 3.0.3
   relno-plugin-contributor:
-    specifier: 0.1.1
-    version: 0.1.1
+    specifier: 1.0.0
+    version: 1.0.0
   ts-jest:
     specifier: ^29.1.1
     version: 29.1.1(@babel/core@7.22.11)(jest@29.6.4)(typescript@5.2.2)
@@ -1732,6 +1732,11 @@ packages:
 
   /date-and-time@3.0.2:
     resolution: {integrity: sha512-MOqlRertOQmQI7ySbz6dKLM7Rxm9dgcPuBI9IL7NVe0UGqHPK+6hWSKVhLrVHxlSgQQtocE2R7+HFOf5aMz8vw==}
+    dev: false
+
+  /date-and-time@3.0.3:
+    resolution: {integrity: sha512-CmHCeTixc3KA5pcLTVs9JCFhmJMFTBsmSsgHnNed4YDNw9yUOrjjRn3zALy8eMgqmTO+4U8k5jl1peC7IoezfA==}
+    dev: true
 
   /debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
@@ -3983,10 +3988,10 @@ packages:
       functions-have-names: 1.2.3
     dev: true
 
-  /relno-plugin-contributor@0.1.1:
-    resolution: {integrity: sha512-z1ONTUCvb8qMJXjzSq41+IeQzp55ZUaAnJYDcFYMKFFG4hZw58YVhTlT6zzLHwoOOTIRPbTvSgz7f0i2pIG77g==}
+  /relno-plugin-contributor@1.0.0:
+    resolution: {integrity: sha512-MoLSM3T8VE7yxaSbQW6wwmhzBf3oEaiFWU9gUsWeACag+Q8MnsJ25tr3fNvZgDHHAzWahE/w2bn+kL67FoAveQ==}
     dependencies:
-      relno: 0.1.1
+      relno: 1.0.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -4000,6 +4005,18 @@ packages:
       ts-pegjs: 4.2.1(peggy@3.0.2)
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /relno@1.0.0:
+    resolution: {integrity: sha512-rTYt0HTQUW/Vj6dN1T3zJ8YWqHj90VNr+scqFPLwNrgNIhglYS9IQlBM/5WUFFjnYio3X9L2r07CdREPg36mhw==}
+    dependencies:
+      date-and-time: 3.0.3
+      peggy: 3.0.2
+      simple-git: 3.21.0
+      ts-pegjs: 4.2.1(peggy@3.0.2)
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /require-directory@2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
@@ -4134,6 +4151,17 @@ packages:
       debug: 4.3.4
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /simple-git@3.21.0:
+    resolution: {integrity: sha512-oTzw9248AF5bDTMk9MrxsRzEzivMlY+DWH0yWS4VYpMhNLhDWnN06pCtaUyPnqv/FpsdeNmRqmZugMABHRPdDA==}
+    dependencies:
+      '@kwsites/file-exists': 1.1.1
+      '@kwsites/promise-deferred': 1.1.1
+      debug: 4.3.4
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
 
   /sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
